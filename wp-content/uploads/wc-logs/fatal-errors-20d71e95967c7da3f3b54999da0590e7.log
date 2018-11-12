@@ -1,0 +1,117 @@
+2018-01-29T21:26:42+00:00 CRITICAL Function name must be a string
+
+2018-01-29T21:27:33+00:00 CRITICAL Function name must be a string
+
+2018-01-29T21:27:37+00:00 CRITICAL Function name must be a string
+
+2018-01-31T06:55:50+00:00 CRITICAL Cannot use object of type stdClass as array
+
+2018-03-19T19:46:17+00:00 CRITICAL Uncaught Error: Call to a member function empty_cart() on null in /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-content/themes/Avada/functions.php:823
+Stack trace:
+#0 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-settings.php(426): include()
+#1 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-config.php(89): require_once('/hermes/bosnacw...')
+#2 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-load.php(37): require_once('/hermes/bosnacw...')
+#3 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-admin/admin-ajax.php(22): require_once('/hermes/bosnacw...')
+#4 {main}
+  thrown
+
+2018-03-19T19:46:19+00:00 CRITICAL Uncaught Error: Call to a member function empty_cart() on null in /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-content/themes/Avada/functions.php:823
+Stack trace:
+#0 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-settings.php(426): include()
+#1 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-config.php(89): require_once('/hermes/bosnacw...')
+#2 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-load.php(37): require_once('/hermes/bosnacw...')
+#3 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-blog-header.php(13): require_once('/hermes/bosnacw...')
+#4 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/index.php(17): require('/hermes/bosnacw...')
+#5 {main}
+  thrown
+
+2018-03-19T21:20:58+00:00 CRITICAL Uncaught Error: Call to a member function empty_cart() on null in /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-content/themes/Avada/functions.php:824
+Stack trace:
+#0 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(286): woocommerce_clear_cart_url('')
+#1 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-settings.php(450): do_action('init')
+#4 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-config.php(89): require_once('/hermes/bosnacw...')
+#5 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-load.php(37): require_once('/hermes/bosnacw...')
+
+2018-03-19T21:47:54+00:00 CRITICAL Uncaught Error: Call to a member function empty_cart() on null in /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-content/themes/Avada/functions.php:824
+Stack trace:
+#0 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(286): woocommerce_clear_cart_url('')
+#1 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-settings.php(450): do_action('init')
+#4 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-config.php(89): require_once('/hermes/bosnacw...')
+#5 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-load.php(37): require_once('/hermes/bosnacw...')
+
+2018-03-19T21:50:27+00:00 CRITICAL Uncaught Error: Call to a member function empty_cart() on null in /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-content/themes/Avada/functions.php:824
+Stack trace:
+#0 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(286): woocommerce_clear_cart_url('')
+#1 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-settings.php(450): do_action('init')
+#4 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-config.php(89): require_once('/hermes/bosnacw...')
+#5 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-load.php(37): require_once('/hermes/bosnacw...')
+
+2018-03-19T21:52:29+00:00 CRITICAL Uncaught Error: Call to a member function empty_cart() on null in /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-content/themes/Avada/functions.php:824
+Stack trace:
+#0 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(286): woocommerce_clear_cart_url('')
+#1 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-settings.php(450): do_action('init')
+#4 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-config.php(89): require_once('/hermes/bosnacw...')
+#5 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-load.php(37): require_once('/hermes/bosnacw...')
+
+2018-03-19T22:03:21+00:00 CRITICAL Uncaught Error: Call to a member function empty_cart() on null in /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-content/themes/Avada/functions.php:824
+Stack trace:
+#0 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(286): woocommerce_clear_cart_url('')
+#1 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-settings.php(450): do_action('init')
+#4 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-config.php(89): require_once('/hermes/bosnacw...')
+#5 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-load.php(37): require_once('/hermes/bosnacw...')
+
+2018-03-19T22:06:34+00:00 CRITICAL Uncaught Error: Call to a member function empty_cart() on null in /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-content/themes/Avada/functions.php:824
+Stack trace:
+#0 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(286): woocommerce_clear_cart_url('')
+#1 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-settings.php(450): do_action('init')
+#4 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-config.php(89): require_once('/hermes/bosnacw...')
+#5 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-load.php(37): require_once('/hermes/bosnacw...')
+
+2018-03-19T22:07:25+00:00 CRITICAL Uncaught Error: Call to a member function empty_cart() on null in /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-content/themes/Avada/functions.php:824
+Stack trace:
+#0 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(286): woocommerce_clear_cart_url('')
+#1 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-settings.php(450): do_action('init')
+#4 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-config.php(89): require_once('/hermes/bosnacw...')
+#5 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-load.php(37): require_once('/hermes/bosnacw...')
+
+2018-03-19T22:07:32+00:00 CRITICAL Uncaught Error: Call to a member function empty_cart() on null in /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-content/themes/Avada/functions.php:824
+Stack trace:
+#0 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(286): woocommerce_clear_cart_url('')
+#1 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-settings.php(450): do_action('init')
+#4 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-config.php(89): require_once('/hermes/bosnacw...')
+#5 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-load.php(37): require_once('/hermes/bosnacw...')
+
+2018-03-19T22:07:34+00:00 CRITICAL Uncaught Error: Call to a member function empty_cart() on null in /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-content/themes/Avada/functions.php:824
+Stack trace:
+#0 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(286): woocommerce_clear_cart_url('')
+#1 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-settings.php(450): do_action('init')
+#4 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-config.php(89): require_once('/hermes/bosnacw...')
+#5 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-load.php(37): require_once('/hermes/bosnacw...')
+
+2018-03-19T22:07:46+00:00 CRITICAL Uncaught Error: Call to a member function empty_cart() on null in /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-content/themes/Avada/functions.php:824
+Stack trace:
+#0 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(286): woocommerce_clear_cart_url('')
+#1 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-settings.php(450): do_action('init')
+#4 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-config.php(89): require_once('/hermes/bosnacw...')
+#5 /hermes/bosnacweb01/bosnacweb01ai/b11/ipg.edelkevis/qa/globalsax/webecommerce/wp-load.php(37): require_once('/hermes/bosnacw...')
+

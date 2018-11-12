@@ -1,0 +1,18 @@
+id,Title,Content,SKU,"Product Type","Parent Product ID",Color,Talle,"Product Attributes"
+1226,"Producto de guia titulo","descripcion del producto de guia",sk123-1,variable,0,,,"a:2:{s:5:""color"";a:6:{s:4:""name"";s:5:""Color"";s:5:""value"";s:12:""verde | azul"";s:8:""position"";i:0;s:10:""is_visible"";i:1;s:12:""is_variation"";i:1;s:11:""is_taxonomy"";i:0;}s:5:""talle"";a:6:{s:4:""name"";s:5:""Talle"";s:5:""value"";s:6:""xs | s"";s:8:""position"";i:1;s:10:""is_visible"";i:1;s:12:""is_variation"";i:1;s:11:""is_taxonomy"";i:0;}}"
+1227,"Producto de guia titulo","descripcion del producto de guia",sk123,variable,1226,verde,xs,
+1228,"Producto de guia titulo","descripcion del producto de guia",sk123,variable,1226,verde,s,
+1229,"Producto de guia titulo","descripcion del producto de guia",sk123,variable,1226,verde,m,
+1230,"Producto de guia titulo","descripcion del producto de guia",sk123,variable,1226,verde,l,
+1231,"Producto de guia titulo","descripcion del producto de guia",sk123,variable,1226,azul,xs,
+1232,"Producto de guia titulo","descripcion del producto de guia",sk123,variable,1226,azul,s,
+1233,"Producto de guia titulo","descripcion del producto de guia",sk123,variable,1226,azul,m,
+1234,"Producto de guia titulo","descripcion del producto de guia",sk123,variable,1226,azul,l,
+1235,"Producto de guia titulo","descripcion del producto de guia",sk123,variable,1226,rojo,xs,
+1236,"Producto de guia titulo","descripcion del producto de guia",sk123,variable,1226,rojo,s,
+1237,"Producto de guia titulo","descripcion del producto de guia",sk123,variable,1226,rojo,m,
+1238,"Producto de guia titulo","descripcion del producto de guia",sk123,variable,1226,rojo,l,
+1239,"Producto de guia titulo","descripcion del producto de guia",,variable,1226,verde,xs,
+1240,"Producto de guia titulo","descripcion del producto de guia",,variable,1226,verde,s,
+1241,"Producto de guia titulo","descripcion del producto de guia",,variable,1226,azul,xs,
+1242,"Producto de guia titulo","descripcion del producto de guia",,variable,1226,azul,s,

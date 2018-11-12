@@ -1,0 +1,106 @@
+/*
+====================================
+	IMPORTS
+====================================
+*/
+
+@import '../../sass/mixins';
+
+/*
+====================================
+	DEFINITIONS TABLE
+====================================
+*/
+
+#custom-global-variables-table-definitions {
+
+	width: 100%;
+
+	> tbody {
+
+		> tr {
+
+			> td {
+
+				text-align: center;
+				vertical-align: top;
+
+				&:first-child {
+
+					width: 30%;
+
+					input {
+						border-top: 0;
+						border-left: 0;
+						border-right: 0;
+					}
+				}
+
+				&.value-input {
+					width: 55%;
+				}
+
+				&.options {
+
+					width: 5%;
+
+					.delete {
+
+						@include opacity(0);
+						@include transition(all .2s ease-in-out);
+
+						cursor: pointer;
+						height: auto;
+						margin: 0.65em 0 0.65em 0.65em;
+						width: 100%;
+					}
+				}
+
+				input, textarea {
+					border: 1px solid #ddd;
+					box-shadow: none;
+					padding: 0.75em;
+					width: 100%;
+				}
+
+				textarea {
+					height: 5em;
+				}
+
+				.equals {
+					color: #999;
+					display: block;
+					padding: 0.75em;
+				}				
+			}
+
+			&:hover {
+
+				> td.options {
+
+					.delete {
+
+						@include opacity(1);
+					}
+				}
+			}
+		}
+	}
+}
+
+/*
+====================================
+	AUTHOR INFORMATION
+====================================
+*/
+
+#custom-global-variables-author-info {
+
+	margin-top: 2em;
+
+	img.konnect {
+		margin: 0 0.5em 0 0;
+		vertical-align: middle;
+		width: 36px;
+	}
+}

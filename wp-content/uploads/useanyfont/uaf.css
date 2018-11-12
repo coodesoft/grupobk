@@ -1,0 +1,61 @@
+			@font-face {
+				font-family: 'myriad-set-pro-text';
+				font-style: normal;
+				src: url('//globalsax.com/demo/wp-content/uploads/useanyfont/180114082415Myriad-Set-Pro-Text.eot');
+				src: local('myriad-set-pro-text'), url('//globalsax.com/demo/wp-content/uploads/useanyfont/180114082415Myriad-Set-Pro-Text.eot') format('embedded-opentype'), url('//globalsax.com/demo/wp-content/uploads/useanyfont/180114082415Myriad-Set-Pro-Text.woff') format('woff');
+			}
+            
+            .myriad-set-pro-text{font-family: 'myriad-set-pro-text' !important;}
+            
+					@font-face {
+				font-family: 'myriad-set-pro-thin';
+				font-style: normal;
+				src: url('//globalsax.com/demo/wp-content/uploads/useanyfont/180215033405Myriad-Set-Pro-Thin.eot');
+				src: local('myriad-set-pro-thin'), url('//globalsax.com/demo/wp-content/uploads/useanyfont/180215033405Myriad-Set-Pro-Thin.eot') format('embedded-opentype'), url('//globalsax.com/demo/wp-content/uploads/useanyfont/180215033405Myriad-Set-Pro-Thin.woff') format('woff');
+			}
+            
+            .myriad-set-pro-thin{font-family: 'myriad-set-pro-thin' !important;}
+            
+					@font-face {
+				font-family: 'myriad-ultralight';
+				font-style: normal;
+				src: url('//globalsax.com/demo/wp-content/uploads/useanyfont/180430125258myriad-ultralight.eot');
+				src: local('myriad-ultralight'), url('//globalsax.com/demo/wp-content/uploads/useanyfont/180430125258myriad-ultralight.eot') format('embedded-opentype'), url('//globalsax.com/demo/wp-content/uploads/useanyfont/180430125258myriad-ultralight.woff') format('woff');
+			}
+            
+            .myriad-ultralight{font-family: 'myriad-ultralight' !important;}
+            
+					@font-face {
+				font-family: 'myriad-medium';
+				font-style: normal;
+				src: url('//globalsax.com/demo/wp-content/uploads/useanyfont/180430125320myriad-medium.eot');
+				src: local('myriad-medium'), url('//globalsax.com/demo/wp-content/uploads/useanyfont/180430125320myriad-medium.eot') format('embedded-opentype'), url('//globalsax.com/demo/wp-content/uploads/useanyfont/180430125320myriad-medium.woff') format('woff');
+			}
+            
+            .myriad-medium{font-family: 'myriad-medium' !important;}
+            
+					@font-face {
+				font-family: 'myriad-bold';
+				font-style: normal;
+				src: url('//globalsax.com/demo/wp-content/uploads/useanyfont/180430125336myriad-bold.eot');
+				src: local('myriad-bold'), url('//globalsax.com/demo/wp-content/uploads/useanyfont/180430125336myriad-bold.eot') format('embedded-opentype'), url('//globalsax.com/demo/wp-content/uploads/useanyfont/180430125336myriad-bold.woff') format('woff');
+			}
+            
+            .myriad-bold{font-family: 'myriad-bold' !important;}
+            
+					@font-face {
+				font-family: 'myriad-semibold';
+				font-style: normal;
+				src: url('//globalsax.com/demo/wp-content/uploads/useanyfont/180430125353myriad-semibold.eot');
+				src: local('myriad-semibold'), url('//globalsax.com/demo/wp-content/uploads/useanyfont/180430125353myriad-semibold.eot') format('embedded-opentype'), url('//globalsax.com/demo/wp-content/uploads/useanyfont/180430125353myriad-semibold.woff') format('woff');
+			}
+            
+            .myriad-semibold{font-family: 'myriad-semibold' !important;}
+            
+						body, h1, h2, h3, h4, h5, h6, p, blockquote, li, a{
+					font-family: 'myriad-set-pro-text' !important;
+				}
+						li a span{
+					font-family: 'myriad-set-pro-thin' !important;
+				}
+		
