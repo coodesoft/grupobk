@@ -29,6 +29,7 @@
         // se agrega la variaci贸n actualmente solicitada
         $('#variation-'+id).html(data);
         $('#variation-'+id).addClass('visible');
+        $('.gbs_data input').first().focus();
 
         //se setea el estilo del actual producto y su variaci贸n
         $(self).addClass('active');
