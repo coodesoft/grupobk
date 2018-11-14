@@ -1,16 +1,24 @@
 (function($) {
 
-	var geocoder;
+	var geocoder = new google.maps.Geocoder();
+	var infowindow = new google.maps.InfoWindow();
+
   var map;
+	var markers = [];
   function initialize() {
-     geocoder = new google.maps.Geocoder();
-     var latlng = new google.maps.LatLng(-34.609030, -58.373220);
      var mapOptions = {
        zoom: 8,
-       center: latlng
+       center: new google.maps.LatLng(-34.609030, -58.373220)
      }
      map = new google.maps.Map(document.getElementById('mapas'), mapOptions);
   }
+
+	function resetMap() {
+		for (var i = 0; i < markers.length; i++) {
+	  	markers[i].setMap(null);
+	  }
+		markers = [];
+	}
 
   function codeAddress(address) {
      geocoder.geocode( { 'address': address}, function(results, status) {
@@ -25,6 +33,40 @@
        }
      });
   }
+
+	function geocodeAddress(location) {
+	  geocoder.geocode( { 'address': location[1]}, function(results, status) {
+	  //alert(status);
+	    if (status == google.maps.GeocoderStatus.OK) {
+
+	      //alert(results[0].geometry.location);
+	      map.setCenter(results[0].geometry.location);
+	      createMarker(results[0].geometry.location,location[0]+"<br>"+location[1]);
+	    }
+	    else
+	    {
+	      alert("some problem in geocode" + status);
+	    }
+	  });
+	}
+
+	function createMarker(latlng,html){
+	  var marker = new google.maps.Marker({
+	    position: latlng,
+	    map: map
+	  });
+		markers.push(marker);
+
+	  google.maps.event.addListener(marker, 'mouseover', function() {
+	    infowindow.setContent(html);
+	    infowindow.open(map, marker);
+	  });
+
+	  google.maps.event.addListener(marker, 'mouseout', function() {
+	    infowindow.close();
+	  });
+	}
+
 
 	var loadUserContentCallback = function(form, action, target, callback){
     var data = {
@@ -66,11 +108,6 @@
 	let root = '#body';
 	let element = '.nombre_cliente';
 
-	$(root).off().on('click', element, function(){
-		let address = $(this).data('address');
-		codeAddress(address);
-	})
-
 	$(root).on('click', '.ciudad', function(){
     $(this).siblings(".sucursal").toggleClass("mostrar", 1000, "easeOutSine");
   });
@@ -80,7 +117,17 @@
 	});
 
 	$(root).on('change', '#provincia select', function(e){
-		loadUserContentCallback (this, "load_prov", '#sucursales');
+		loadUserContentCallback (this, "load_prov", '#sucursales', function(){
+
+			let sucursales = $('.nombre_cliente');
+			let address = [], sucursal, cliente;
+			resetMap();
+			for (var i = 0; i < sucursales.length; i++) {
+				sucursal = $(sucursales[i]);
+				cliente = sucursal.find('span').text();
+				geocodeAddress([cliente, sucursal.data('address')]);
+			}
+		});
 	});
 
 	$(root).on('click', '.locales_img', function(e){
