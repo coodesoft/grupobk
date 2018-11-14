@@ -101,7 +101,6 @@ function cu_get_sucursales(){
   wp_die();
 }
 
-
 add_action( 'wp_ajax_cu_add_sucursal', 'cu_add_sucursal' );
 function cu_add_sucursal(){
   $params = array();
@@ -135,6 +134,12 @@ function cu_add_sucursal(){
 add_action('wp_ajax_load_prov', 'load_prov');
 add_action('wp_ajax_nopriv_load_prov', 'load_prov');
 function load_prov(){
+
+  /* Con esta variable se puede sustituir facilmente la ruta base de las imágenes
+   * sin tener que modificar TODAS las rutas, una por una.
+   */
+  $imgBasePath = '/grupobk/img/';
+
   parse_str ($_POST['user'], $values);
   $sucursales = Clients::getSucursalesByProvincia($values['menu-prov']);
   $ciudadescargadas = array();
@@ -150,23 +155,23 @@ function load_prov(){
         <div class="info">
           <ul>
           <?php if (($v['sitio_web'])== true) { ?>
-            <li><img class="items" src="/demo/img/locales_sitio_web.svg" href="#"></li>
+            <li><img class="items" src="<?php echo $imgBasePath.'locales_sitio_web.svg'?>"></li>
           <?php } ?>
 
           <?php if (($v['venta_mayorista'])== true) { ?>
-            <li><img class="items" src="/demo/img/locales_venta_mayorista.svg"></li>
+            <li><img class="items" src="<?php echo $imgBasePath.'locales_venta_mayorista.svg'?>"></li>
           <?php } ?>
 
           <?php if (($v['venta_minorista'])== true) {  ?>
-            <li><img class="items" src="/demo/img/locales_venta_minorista.svg"></li>
+            <li><img class="items" src="<?php echo $imgBasePath.'locales_venta_minorista.svg'?>"></li>
           <?php } ?>
 
           <?php if (($v['venta_online'])== true) { ?>
-            <li><img class="items" src="/demo/img/locales_venta_online.svg"></li>
+            <li><img class="items" src="<?php echo $imgBasePath.'locales_venta_online.svg'?>"></li>
           <?php } ?>
 
           <?php if (($v['revendedoras'])== true) { ?>
-            <li><img class="items" src="/demo/img/locales_revendedoras.svg"></li>
+            <li><img class="items" src="<?php echo $imgBasePath.'locales_revendedoras.svg'?>"></li>
           <?php } ?>
         </ul>
         </div>
@@ -184,6 +189,11 @@ function load_prov(){
 add_action('wp_ajax_cat_filter', 'cat_filter');
 add_action('wp_ajax_nopriv_cat_filter', 'cat_filter');
 function cat_filter(){
+
+  /* Con esta variable se puede sustituir facilmente la ruta base de las imágenes
+   * sin tener que modificar TODAS las rutas, una por una.
+   */
+  $imgBasePath = '/grupobk/img/';
   $category = $_POST['cat']['cat'];
   $sucursales = Clients::getSucursalesByCategory($category);
   $ciudadescargadas = array();
@@ -197,23 +207,22 @@ function cat_filter(){
         <div class="info">
           <ul>
           <?php if (($v['sitio_web'])== true) { ?>
-            <li><img class="items" src="/demo/img/locales_sitio_web.svg" href="#"></li>
+            <li><img class="items" src="<?php echo $imgBasePath.'locales_sitio_web.svg'?>"></li>
           <?php } ?>
-
           <?php if (($v['venta_mayorista'])== true) { ?>
-            <li><img class="items" src="/demo/img/locales_venta_mayorista.svg"></li>
+            <li><img class="items" src="<?php echo $imgBasePath.'locales_venta_mayorista.svg'?>"></li>
           <?php } ?>
 
           <?php if (($v['venta_minorista'])== true) {  ?>
-            <li><img class="items" src="/demo/img/locales_venta_minorista.svg"></li>
+            <li><img class="items" src="<?php echo $imgBasePath.'locales_venta_minorista.svg'?>"></li>
           <?php } ?>
 
           <?php if (($v['venta_online'])== true) { ?>
-            <li><img class="items" src="/demo/img/locales_venta_online.svg"></li>
+            <li><img class="items" src="<?php echo $imgBasePath.'locales_venta_online.svg'?>"></li>
           <?php } ?>
 
           <?php if (($v['revendedoras'])== true) { ?>
-            <li><img class="items" src="/demo/img/locales_revendedoras.svg"></li>
+            <li><img class="items" src="<?php echo $imgBasePath.'locales_revendedoras.svg'?>"></li>
           <?php } ?>
         </ul>
         </div>

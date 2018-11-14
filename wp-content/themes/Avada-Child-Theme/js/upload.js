@@ -41,7 +41,7 @@
 
 	      //alert(results[0].geometry.location);
 	      map.setCenter(results[0].geometry.location);
-	      createMarker(results[0].geometry.location,location[0]+"<br>"+location[1]);
+	      createMarker(results[0].geometry.location,location[0]+"<br>"+location[1]+"<br>"+location[2]);
 	    }
 	    else
 	    {
@@ -120,19 +120,33 @@
 		loadUserContentCallback (this, "load_prov", '#sucursales', function(){
 
 			let sucursales = $('.nombre_cliente');
-			let address = [], sucursal, cliente;
+			let address = [], sucursal, cliente, features, featHtml;
 			resetMap();
 			for (var i = 0; i < sucursales.length; i++) {
 				sucursal = $(sucursales[i]);
 				cliente = sucursal.find('span').text();
-				geocodeAddress([cliente, sucursal.data('address')]);
+				features = sucursal.parent().find('.info');
+				featHtml = '<div class="info">'+features.html()+'</div>';
+				geocodeAddress([cliente, sucursal.data('address'), featHtml]);
 			}
 		});
 	});
 
 	$(root).on('click', '.locales_img', function(e){
 		let category = $(this).data();
-		loadCatContentCallback (category, "cat_filter", '#sucursales');
+		loadCatContentCallback (category, "cat_filter", '#sucursales', function(){
+
+			let sucursales = $('.nombre_cliente');
+			let address = [], sucursal, cliente, features, featHtml;
+			resetMap();
+			for (var i = 0; i < sucursales.length; i++) {
+				sucursal = $(sucursales[i]);
+				cliente = sucursal.find('span').text();
+				features = sucursal.parent().find('.info');
+				featHtml = '<div class="info">'+features.html()+'</div>';
+				geocodeAddress([cliente, sucursal.data('address'), featHtml]);
+			}
+		});
 	});
 
 	$('.trescol').on('change', 'input.file-archivo', function(){
