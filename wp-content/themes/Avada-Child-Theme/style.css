@@ -444,15 +444,6 @@ input#buscar {
 	width:100%;
 }
 
-.info_list ul {
-	padding:0;
-	display:inline-flex;
-	margin:0;
-	list-style:none;
-	margin-left:auto;
-  height:50px;
-}
-
 .info_list select {
 	text-indent: 10px;
     text-align: left;
@@ -772,7 +763,7 @@ li.fusion-custom-menu-item.fusion-menu-cart.fusion-main-menu-cart.fusion-widget-
   #gbsCheckout .product_name .product-info,
   #gbsCheckout .user-actions{
     text-align: center;
-	
+
   }
 
   #gbsCheckout .user-actions{
@@ -870,4 +861,59 @@ p.demo_store{
 }
 #gbsAddVariationToCartButton{
 	height: 1%!important;
+}
+
+/* estilo de locales.php */
+
+.locales-section #provincia{
+  display: inline-block;
+}
+
+.locales-section #provincia::after{
+  content: "";
+  display: inline-block;
+  vertical-align: bottom;
+  height: 75px;
+}
+
+.locales-section #provincia > p{
+  display: none;
+}
+
+
+.info_list .filters {
+	padding:0;
+	display:inline-block;
+  vertical-align: middle;
+  float:right;
+}
+
+.info_list .filters ul{
+  margin:0;
+  padding-left: 0;
+  list-style: none;
+  height:50px;
+}
+
+.info_list .filters li{
+  display: inline-block;
+}
+
+.info-list .selector{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.info_list .filters .filters-title{
+  font-size: 0.7em;
+  margin-bottom: 5px;
+}
+
+
+.bk-pointer{
+  cursor: pointer
+}
+
+body.bk-progress{
+  cursor: progress;
 }
