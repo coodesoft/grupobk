@@ -117,7 +117,10 @@
 	});
 
 	$(root).on('change', '#provincia select', function(e){
+		$('body').addClass('bk-progress');
+
 		loadUserContentCallback (this, "load_prov", '#sucursales', function(){
+			$('body').removeClass('bk-progress');
 
 			let sucursales = $('.nombre_cliente');
 			let address = [], sucursal, cliente, features, featHtml;
@@ -133,8 +136,10 @@
 	});
 
 	$(root).on('click', '.locales_img', function(e){
-		let category = $(this).data();
+		let category = $(this).data('categoria');
+		$('body').addClass('bk-progress');
 		loadCatContentCallback (category, "cat_filter", '#sucursales', function(){
+			$('body').removeClass('bk-progress');
 
 			let sucursales = $('.nombre_cliente');
 			let address = [], sucursal, cliente, features, featHtml;

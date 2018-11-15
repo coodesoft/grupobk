@@ -2,6 +2,58 @@
 
 require_once(__DIR__ . '/../db/Clients.php');
 
+/* Con esta variable se puede sustituir facilmente la ruta base de las imágenes
+   sin tener que modificar TODAS las rutas, una por una. */
+$imgBasePath = '/grupobk/img/';
+
+function buildLocalesListHTML($sucursales){
+  global $imgBasePath;
+
+  $groupedSucursales = [];
+  foreach ($sucursales as $key => $sucursal) {
+    $ciudad = $sucursal['ciudad'];
+    $groupedSucursales[$ciudad][] = $sucursal;
+  }
+
+  foreach ($groupedSucursales as $ciudad => $sucursales) { ?>
+    <div class="container-prov">
+      <div class="ciudad bk-pointer"> <?php echo $ciudad ?> </div>
+      <?php foreach ($sucursales as $k => $v) { ?>
+        <div id="hidden-info" class="sucursal">
+          <div class="nombre_cliente" data-address="<?php echo $v['direccion_publica'].",".$v['ciudad'].",".$v['provincia'].",Argentina" ?>">
+             <span><?php echo $v['nombre_cliente'] ?></span>
+          </div>
+          <div class="direccion_publica"> <?php echo $v['direccion_publica'] ?> </div>
+          <div class="info">
+            <ul>
+              <?php if (($v['sitio_web'])== true) { ?>
+                <li><img class="items" data-toggle="tooltip" data-placement="top" title="Sitio Web" src="<?php echo $imgBasePath.'locales_sitio_web.svg'?>"></li>
+              <?php } ?>
+
+              <?php if (($v['venta_mayorista'])== true) { ?>
+                <li><img class="items" data-toggle="tooltip" data-placement="top" title="Venta Mayorista" src="<?php echo $imgBasePath.'locales_venta_mayorista.svg'?>"></li>
+              <?php } ?>
+
+              <?php if (($v['venta_minorista'])== true) {  ?>
+                <li><img class="items" data-toggle="tooltip" data-placement="top" title="Venta Minorista" src="<?php echo $imgBasePath.'locales_venta_minorista.svg'?>"></li>
+              <?php } ?>
+
+              <?php if (($v['venta_online'])== true) { ?>
+                <li><img class="items" data-toggle="tooltip" data-placement="top" title="Venta Online" src="<?php echo $imgBasePath.'locales_venta_online.svg'?>"></li>
+              <?php } ?>
+
+              <?php if (($v['revendedoras'])== true) { ?>
+                <li><img class="items" data-toggle="tooltip" data-placement="top" title="Revendedor" src="<?php echo $imgBasePath.'locales_revendedoras.svg'?>"></li>
+              <?php } ?>
+            </ul>
+          </div>
+        </div>
+      <?php }?>
+    </div>
+  <?php }
+}
+
+
 
 add_action( 'wp_ajax_cu_add_client', 'cu_add_client' );
 function cu_add_client(){
@@ -131,57 +183,15 @@ function cu_add_sucursal(){
   wp_die();
 }
 
+
+
 add_action('wp_ajax_load_prov', 'load_prov');
 add_action('wp_ajax_nopriv_load_prov', 'load_prov');
 function load_prov(){
-
-  /* Con esta variable se puede sustituir facilmente la ruta base de las imágenes
-   * sin tener que modificar TODAS las rutas, una por una.
-   */
-  $imgBasePath = '/grupobk/img/';
-
   parse_str ($_POST['user'], $values);
   $sucursales = Clients::getSucursalesByProvincia($values['menu-prov']);
-  $ciudadescargadas = array();
-  foreach ($sucursales as $k => $v) {
-     if (($v['provincia'] == $values['menu-prov'])){
-     if (!(in_array($v['id'], $ciudadescargadas))){ ?>
-      <div class="container-prov">
-      <div class="ciudad"> <?php echo $v['ciudad'] ?>   </div>
-      <div id="hidden-info" class="sucursal">
-        <div class="nombre_cliente" data-address="<?php echo $v['direccion_publica'].",".$v['ciudad'].",".$v['provincia'].",Argentina" ?>">
-           <span><?php echo $v['nombre_cliente'] ?></span></div>
-        <div class="direccion_publica"> <?php echo $v['direccion_publica'] ?> </div>
-        <div class="info">
-          <ul>
-          <?php if (($v['sitio_web'])== true) { ?>
-            <li><img class="items" src="<?php echo $imgBasePath.'locales_sitio_web.svg'?>"></li>
-          <?php } ?>
 
-          <?php if (($v['venta_mayorista'])== true) { ?>
-            <li><img class="items" src="<?php echo $imgBasePath.'locales_venta_mayorista.svg'?>"></li>
-          <?php } ?>
-
-          <?php if (($v['venta_minorista'])== true) {  ?>
-            <li><img class="items" src="<?php echo $imgBasePath.'locales_venta_minorista.svg'?>"></li>
-          <?php } ?>
-
-          <?php if (($v['venta_online'])== true) { ?>
-            <li><img class="items" src="<?php echo $imgBasePath.'locales_venta_online.svg'?>"></li>
-          <?php } ?>
-
-          <?php if (($v['revendedoras'])== true) { ?>
-            <li><img class="items" src="<?php echo $imgBasePath.'locales_revendedoras.svg'?>"></li>
-          <?php } ?>
-        </ul>
-        </div>
-      </div>
-    </div>
-        <?php array_push($ciudadescargadas, $v['id']);
-
-      }
-      }
-    }
+  echo buildLocalesListHTML($sucursales);
 
   wp_die();
 }
@@ -190,48 +200,9 @@ add_action('wp_ajax_cat_filter', 'cat_filter');
 add_action('wp_ajax_nopriv_cat_filter', 'cat_filter');
 function cat_filter(){
 
-  /* Con esta variable se puede sustituir facilmente la ruta base de las imágenes
-   * sin tener que modificar TODAS las rutas, una por una.
-   */
-  $imgBasePath = '/grupobk/img/';
-  $category = $_POST['cat']['cat'];
+  $category = $_POST['cat'];
   $sucursales = Clients::getSucursalesByCategory($category);
-  $ciudadescargadas = array();
-  foreach ($sucursales as $k => $v) {
-     if (!(in_array($v['id'], $ciudadescargadas))){ ?>
-      <div class="container-prov">
-      <div class="ciudad"> <?php echo $v['ciudad'] ?>   </div>
-      <div id="hidden-info" class="sucursal">
-        <div class="nombre_cliente" data-address="<?php echo $v['direccion_publica'].",".$v['ciudad'].",".$v['provincia'].",Argentina" ?>"> <span><?php echo $v['nombre_cliente'] ?></span></div>
-        <div class="direccion_publica"> <?php echo $v['direccion_publica'] ?> </div>
-        <div class="info">
-          <ul>
-          <?php if (($v['sitio_web'])== true) { ?>
-            <li><img class="items" src="<?php echo $imgBasePath.'locales_sitio_web.svg'?>"></li>
-          <?php } ?>
-          <?php if (($v['venta_mayorista'])== true) { ?>
-            <li><img class="items" src="<?php echo $imgBasePath.'locales_venta_mayorista.svg'?>"></li>
-          <?php } ?>
-
-          <?php if (($v['venta_minorista'])== true) {  ?>
-            <li><img class="items" src="<?php echo $imgBasePath.'locales_venta_minorista.svg'?>"></li>
-          <?php } ?>
-
-          <?php if (($v['venta_online'])== true) { ?>
-            <li><img class="items" src="<?php echo $imgBasePath.'locales_venta_online.svg'?>"></li>
-          <?php } ?>
-
-          <?php if (($v['revendedoras'])== true) { ?>
-            <li><img class="items" src="<?php echo $imgBasePath.'locales_revendedoras.svg'?>"></li>
-          <?php } ?>
-        </ul>
-        </div>
-      </div>
-    </div>
-        <?php array_push($ciudadescargadas, $v['id']);
-
-      }
-    }
+  echo buildLocalesListHTML($sucursales);
   wp_die();
 }
 
