@@ -270,7 +270,7 @@ function gbs_products_list($products, $cartItems){ ?>
       <li class="product-<?php echo $product->get_id() ?> product product-type" data-product="<?php echo $product->get_id() ?>">
         <div class="product-description">
           	<div class="product-details-container">
-              <h3 class="product-title" data-fontsize="16" data-lineheight="24"><?php echo $product->get_name() ?></h3>
+              <h3 class="product-title" data-fontsize="16" data-lineheight="24"><?php echo substr($product->get_name(), 2) ?></h3>
               <?php $p_id = $product->get_id();
               if ( isset($cartItems[$p_id]) && $cartItems[$p_id]>0 ){ ?>
                 <span class="qty" data-fontsize="13">(Cantidad pedida: <?php echo $cartItems[$p_id]; ?> ) </span>

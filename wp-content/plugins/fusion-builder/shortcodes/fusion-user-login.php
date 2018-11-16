@@ -347,8 +347,9 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 					if ( ! empty( $query_args ) ) {
 						$redirection_link = add_query_arg( $query_args, $redirection_link );
 					}
-
-					$html .= '<input type="hidden" name="redirect_to" value="' . esc_url( $redirection_link ) . '" />';
+//ESTO FUE MODIFICADO, DEBERIA SER esc_url('$redirection_link') en lugar de: home_url( '/noticias/' )
+					$html .= '<input type="hidden" name="redirect_to" value="' . home_url( '/noticias/' ) . '" />';
+//FIN MODIFICADO
 					$html .= '<input type="hidden" name="fusion_login_box" value="true" />';
 
 				}
