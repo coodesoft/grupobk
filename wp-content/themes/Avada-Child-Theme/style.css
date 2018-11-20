@@ -9,6 +9,19 @@ Version: 1.0.0
 Text Domain:  Avada
 */
 
+main#main {
+    padding: 0px!important;
+}
+
+.fusion-logo {
+    margin: 20px 0 35px!important;
+}
+
+img.fusion-standard-logo, img.fusion-mobile-logo-2x {
+    width: 200px!important;
+    height: 35px!important;
+}
+
 .fusion-secondary-main-menu {
     border-bottom: 0px!important;
     padding-left: 0px!important;
@@ -34,8 +47,20 @@ Text Domain:  Avada
     padding-right: 70px!important;
 }
 
+.n2-ss-widget.n2-ss-widget-display-desktop.n2-ss-widget-display-tablet.n2-ss-widget-display-mobile.n2-ss-control-bullet {
+    margin-top: 31px!important;
+}
+
+img.img-responsive.wp-image-1118 {
+    margin-bottom: 20px;
+}
+
 .img-grupobk img {
 	width: 70%;
+}
+
+.log_in.fusion-header {
+    height: 30px;
 }
 
 .folder.icon img {
@@ -98,7 +123,7 @@ li#menu-item-22 > a {
 }
 
 div#n2-ss-2-align {
-    margin: 80px auto;
+    margin: 50px auto 0;
     max-width: 1100px;
 }
 
@@ -444,6 +469,15 @@ input#buscar {
 	width:100%;
 }
 
+.info_list ul {
+	padding:0;
+	display:inline-flex;
+	margin:0;
+	list-style:none;
+	margin-left:auto;
+  height:50px;
+}
+
 .info_list select {
 	text-indent: 10px;
     text-align: left;
@@ -664,7 +698,41 @@ input[type=date]::-webkit-outer-spin-button{
 		width: 90% !important;
     	margin: 0 auto!important;
 	}
+	img.img-responsive.wp-image-1101,
+	img.img-responsive.wp-image-1111,
+	img.img-responsive.wp-image-1100,
+	img.img-responsive.wp-image-1110 {
+		margin: 0!important;
+	}
+	.fusion-column-wrapper {
+    	margin: 0 5rem;
+	}
+	.fusion-column.col-lg-2.col-md-2.col-sm-2 {
+    	width: 16.66666667%!important;
+    	float: left;
+	}
+	.fusion-tabs .nav{
+		display:flex!important;
+	}
+	.fusion-tabs .nav-tabs{
+		display:flex!important;
+	}
+	.fusion-tabs .nav-tabs li{
+		display:flex!important;
+		margin:0 auto!important;
+	}
+	.trescol label p{
+		font-size:1em!important;
+	}
+	.space label p{
+		margin-bottom:1.2em;
+	}
 }
+
+h3.map-site {
+    font-weight: 400;
+}
+
 .doscol input{
 	text-indent: 10px;
     display: block;
@@ -763,7 +831,7 @@ li.fusion-custom-menu-item.fusion-menu-cart.fusion-main-menu-cart.fusion-widget-
   #gbsCheckout .product_name .product-info,
   #gbsCheckout .user-actions{
     text-align: center;
-
+	
   }
 
   #gbsCheckout .user-actions{
@@ -862,6 +930,7 @@ p.demo_store{
 #gbsAddVariationToCartButton{
 	height: 1%!important;
 }
+
 
 /* estilo de locales.php */
 
