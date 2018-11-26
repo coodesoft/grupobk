@@ -172,11 +172,11 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 				} else {
 					$user = get_user_by( 'id', get_current_user_id() );
 
-					$html .= '<div class="fusion-login-caption">' . sprintf( esc_attr__( 'Welcome %s', 'fusion-builder' ), ucwords( $user->display_name ) ) . '</div>';
+					$html .= '<div class="fusion-login-caption">' . sprintf( esc_attr__( 'Bienvenido %s', 'fusion-builder' ), ucwords( $user->display_name ) ) . '</div>';
 					$html .= '<div class="fusion-login-avatar">' . get_avatar( $user->ID, apply_filters( 'fusion_login_box_avatar_size', 50 ) ) . '</div>';
 					$html .= '<ul class="fusion-login-loggedin-links">';
 					$html .= '<li><a href="' . get_dashboard_url() . '">' . esc_attr__( 'Dashboard', 'fusion-builder' ) . '</a></li>';
-					$html .= '<li><a href="' . get_edit_user_link( $user->ID ) . '">' . esc_attr__( 'Profile', 'fusion-builder' ) . '</a></li>';
+					$html .= '<li><a href="' . get_edit_user_link( $user->ID ) . '">' . esc_attr__( 'Perfil', 'fusion-builder' ) . '</a></li>';
 					$html .= '<li><a href="' . wp_logout_url( get_permalink() ) . '">' . esc_attr__( 'Logout', 'fusion-builder' ) . '</a></li>';
 					$html .= '</ul>';
 
@@ -220,8 +220,8 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 					$html .= $this->render_notices( $action );
 
 					$html .= '<div class="fusion-login-input-wrapper">';
-					$html .= '<label class="fusion-hidden-content" for="user_login">' . esc_attr__( 'Username', 'fusion-builder' ) . '</label>';
-					$html .= '<input type="text" name="user_login" placeholder="' . esc_attr__( 'Username', 'fusion-builder' ) . '" value="" size="20" class="fusion-login-username input-text" id="user_login" />';
+					$html .= '<label class="fusion-hidden-content" for="user_login">' . esc_attr__( 'Usuario', 'fusion-builder' ) . '</label>';
+					$html .= '<input type="text" name="user_login" placeholder="' . esc_attr__( 'Usuario', 'fusion-builder' ) . '" value="" size="20" class="fusion-login-username input-text" id="user_login" />';
 					$html .= '</div>';
 
 					$html .= '<div class="fusion-login-input-wrapper">';
@@ -231,11 +231,11 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 
 					/* Only added as honeypot for spambots. */
 					$html .= '<div class="fusion-login-input-wrapper">';
-					$html .= '<label class="fusion-hidden-content" for="confirm_email">Please leave this field empty</label>';
+					$html .= '<label class="fusion-hidden-content" for="confirm_email">Por favor deje este campo vacío</label>';
 					$html .= '<input class="fusion-hidden-content" type="text" name="confirm_email" id="confirm_email" value="">';
 					$html .= '</div>';
 
-					$html .= '<p class="fusion-login-input-wrapper">' . esc_attr__( 'Registration confirmation will be e-mailed to you.', 'fusion-builder' ) . '</p>';
+					$html .= '<p class="fusion-login-input-wrapper">' . esc_attr__( 'La confirmación de registro le va a ser enviada por mail.', 'fusion-builder' ) . '</p>';
 
 					$html .= '<div class="fusion-login-submit-wrapperr">';
 					$html .= '<button ' . FusionBuilder::attributes( 'login-shortcode-button' ) . '>' . esc_attr__( 'Register', 'fusion-builder' ) . '</button>';
@@ -291,11 +291,11 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 					// Get the success/error notices.
 					$html .= $this->render_notices( $action );
 
-					$html .= '<p class="fusion-login-input-wrapper">' . esc_attr__( 'Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.', 'fusion-builder' ) . '</p>';
+					$html .= '<p class="fusion-login-input-wrapper">' . esc_attr__( 'Perdiste tu contraseña? Por favor ingrese su usuario o su dirección de mail. Recibirá por mail un link para crear una contraseña nueva.', 'fusion-builder' ) . '</p>';
 
 					$html .= '<div class="fusion-login-input-wrapper">';
-					$html .= '<label class="fusion-hidden-content" for="user_login">' . esc_attr__( 'Username or Email', 'fusion-builder' ) . '</label>';
-					$html .= '<input type="text" name="user_login" placeholder="' . esc_attr__( 'Username or Email', 'fusion-builder' ) . '" value="" size="20" class="fusion-login-username input-text" id="user_login" />';
+					$html .= '<label class="fusion-hidden-content" for="user_login">' . esc_attr__( 'Usuario o Email', 'fusion-builder' ) . '</label>';
+					$html .= '<input type="text" name="user_login" placeholder="' . esc_attr__( 'Usuario o Email', 'fusion-builder' ) . '" value="" size="20" class="fusion-login-username input-text" id="user_login" />';
 					$html .= '</div>';
 
 					$html .= '<div class="fusion-login-submit-wrapperr">';
@@ -312,7 +312,7 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 					$html .= '</div>';
 
 				} else {
-					$html .= do_shortcode( '[fusion_alert type="general" border_size="1px" box_shadow="yes"]' . esc_attr__( 'You are already signed in.', 'fusion-builder' ) . '[/fusion_alert]' );
+					$html .= do_shortcode( '[fusion_alert type="general" border_size="1px" box_shadow="yes"]' . esc_attr__( 'Ya iniciaste sesión.', 'fusion-builder' ) . '[/fusion_alert]' );
 				}
 
 				return $html;
@@ -597,13 +597,13 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 					// Login - there is only an error message and it is always the same.
 					if ( 'login' == $_GET['action'] && isset( $_GET['success'] ) && '0' == $_GET['success'] ) {
 						$notice_type = 'error';
-						$notices     = esc_attr__( 'Login failed, please try again.', 'fusion-builder' );
+						$notices     = esc_attr__( 'Inicio de sesión fallido, intente nuevamente.', 'fusion-builder' );
 						// Registration.
 					} elseif ( 'register' == $_GET['action'] ) {
 						// Success.
 						if ( isset( $_GET['success'] ) && '1' == $_GET['success'] ) {
 							$notice_type = 'success';
-							$notices     = esc_attr__( 'Registration complete. Please check your e-mail.', 'fusion-builder' );
+							$notices     = esc_attr__( 'Registro completo. Revise su e-mail.', 'fusion-builder' );
 							// Error.
 						} else {
 							$notice_type = 'error';
@@ -611,24 +611,24 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 
 							// Empty username.
 							if ( isset( $_GET['empty_username'] ) ) {
-								$notices .= esc_attr__( 'Please enter a username.', 'fusion-builder' ) . '<br />';
+								$notices .= esc_attr__( 'Por favor ingrese su Usuario.', 'fusion-builder' ) . '<br />';
 							}
 							// Empty email.
 							if ( isset( $_GET['empty_email'] ) ) {
-								$notices .= esc_attr__( 'Please type your e-mail address.', 'fusion-builder' ) . '<br />';
+								$notices .= esc_attr__( 'Por favor escriba su dirección de e-mail.', 'fusion-builder' ) . '<br />';
 							}
 							// Username exists.
 							if ( isset( $_GET['username_exists'] ) ) {
-								$notices .= esc_attr__( 'This username is already registered. Please choose another one.', 'fusion-builder' ) . '<br />';
+								$notices .= esc_attr__( 'El nombre de Usuario ya existe. Seleccione uno diferente.', 'fusion-builder' ) . '<br />';
 							}
 							// Email exists.
 							if ( isset( $_GET['email_exists'] ) ) {
-								$notices .= esc_attr__( 'This email is already registered, please choose another one.', 'fusion-builder' ) . '<br />';
+								$notices .= esc_attr__( 'El email ya está registrado, seleccione uno diferente.', 'fusion-builder' ) . '<br />';
 							}
 
 							// Generic Error.
 							if ( ! $notices ) {
-								$notices .= esc_attr__( 'Something went wrong during registration. Please try again.', 'fusion-builder' );
+								$notices .= esc_attr__( 'Se ha producido un error durante el registro. Por favor intente nuevamente.', 'fusion-builder' );
 								// Delete the last line break.
 							} else {
 								$notices = substr( $notices, 0, strlen( $notices ) - 6 );
@@ -639,7 +639,7 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 						if ( isset( $_GET['success'] ) && '1' == $_GET['success'] ) {
 							// Success.
 							$notice_type = 'success';
-							$notices     = esc_attr__( 'Check your e-mail for the confirmation link.', 'fusion-builder' );
+							$notices     = esc_attr__( 'Revise su e-mail para obtener el link de confirmación.', 'fusion-builder' );
 						} else {
 							// Error.
 							$notice_type = 'error';
@@ -647,22 +647,22 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 
 							// Empty login.
 							if ( isset( $_GET['empty_login'] ) ) {
-								$notices .= esc_attr__( 'Enter a username or e-mail address.', 'fusion-builder' ) . '<br />';
+								$notices .= esc_attr__( 'Ingrese nombre de usuario o e-mail.', 'fusion-builder' ) . '<br />';
 							}
 
 							// Empty login.
 							if ( isset( $_GET['unregisred_user'] ) ) {
-								$notices .= esc_attr__( 'Invalid username.', 'fusion-builder' ) . '<br />';
+								$notices .= esc_attr__( 'Nombre de Usuario inválido.', 'fusion-builder' ) . '<br />';
 							}
 
 							// Empty login.
 							if ( isset( $_GET['unregistered_mail'] ) ) {
-								$notices .= esc_attr__( 'There is no user registered with that email address.', 'fusion-builder' ) . '<br />';
+								$notices .= esc_attr__( 'No existe usuario registrado con ese e-mail.', 'fusion-builder' ) . '<br />';
 							}
 
 							// Generic Error.
 							if ( ! $notices ) {
-								$notices .= esc_attr__( 'Invalid username or e-mail.', 'fusion-builder' );
+								$notices .= esc_attr__( 'Nombre de usuario o e-mail inválido.', 'fusion-builder' );
 								// Delete the last line break.
 							} else {
 								$notices = substr( $notices, 0, strlen( $notices ) - 6 );
