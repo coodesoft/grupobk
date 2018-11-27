@@ -139,17 +139,17 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 					$html .= $this->render_notices( $action );
 
 					$html .= '<div class="fusion-login-input-wrapper">';
-					$html .= '<label class="fusion-hidden-content" for="user_login">' . esc_attr__( 'Username', 'fusion-builder' ) . '</label>';
-					$html .= '<input type="text" name="log" placeholder="' . esc_attr__( 'Username', 'fusion-builder' ) . '" value="' . esc_attr( $user_login ) . '" size="20" class="fusion-login-username input-text" id="user_login" />';
+					$html .= '<label class="fusion-hidden-content" for="user_login">' . esc_attr__( 'Usuario', 'fusion-builder' ) . '</label>';
+					$html .= '<input type="text" name="log" placeholder="' . esc_attr__( 'Usuario', 'fusion-builder' ) . '" value="' . esc_attr( $user_login ) . '" size="20" class="fusion-login-username input-text" id="user_login" />';
 					$html .= '</div>';
 
 					$html .= '<div class="fusion-login-input-wrapper">';
-					$html .= '<label class="fusion-hidden-content" for="user_pass">' . esc_attr__( 'Password', 'fusion-builder' ) . '</label>';
-					$html .= '<input type="password" name="pwd" placeholder="' . esc_attr__( 'Password', 'fusion-builder' ) . '" value="" size="20" class="fusion-login-password input-text" id="user_pass" />';
+					$html .= '<label class="fusion-hidden-content" for="user_pass">' . esc_attr__( 'Contraseña', 'fusion-builder' ) . '</label>';
+					$html .= '<input type="password" name="pwd" placeholder="' . esc_attr__( 'Contraseña', 'fusion-builder' ) . '" value="" size="20" class="fusion-login-password input-text" id="user_pass" />';
 					$html .= '</div>';
 
 					$html .= '<div class="fusion-login-submit-wrapperr">';
-					$html .= '<button ' . FusionBuilder::attributes( 'login-shortcode-button' ) . '>' . esc_attr__( 'Log in', 'fusion-builder' ) . '</button>';
+					$html .= '<button ' . FusionBuilder::attributes( 'login-shortcode-button' ) . '>' . esc_attr__( 'Iniciar sesión', 'fusion-builder' ) . '</button>';
 
 					// Set the query string for successful password reset.
 					if ( ! $redirection_link ) {
@@ -161,10 +161,10 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 
 					$html .= '<div class="fusion-login-links">';
 					if ( '' !== $lost_password_link ) {
-						$html .= '<a class="fusion-login-lost-passowrd" target="_self" href="' . $lost_password_link . '">' . esc_attr__( 'Lost password?', 'fusion-builder' ) . '</a>';
+						$html .= '<a class="fusion-login-lost-passowrd" target="_self" href="' . $lost_password_link . '">' . esc_attr__( 'Recuperar contraseña', 'fusion-builder' ) . '</a>';
 					}
 					if ( '' !== $register_link ) {
-						$html .= '<a class="fusion-login-register" target="_self" href="' . $register_link . '">' . esc_attr__( 'Register', 'fusion-builder' ) . '</a>';
+						$html .= '<a class="fusion-login-register" target="_self" href="' . $register_link . '">' . esc_attr__( 'Registrarse', 'fusion-builder' ) . '</a>';
 					}
 					$html .= '</div>';
 
@@ -238,7 +238,7 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 					$html .= '<p class="fusion-login-input-wrapper">' . esc_attr__( 'La confirmación de registro le va a ser enviada por mail.', 'fusion-builder' ) . '</p>';
 
 					$html .= '<div class="fusion-login-submit-wrapperr">';
-					$html .= '<button ' . FusionBuilder::attributes( 'login-shortcode-button' ) . '>' . esc_attr__( 'Register', 'fusion-builder' ) . '</button>';
+					$html .= '<button ' . FusionBuilder::attributes( 'login-shortcode-button' ) . '>' . esc_attr__( 'Registrarse', 'fusion-builder' ) . '</button>';
 
 					// Set the query string for successful password reset.
 					if ( ! $redirection_link ) {
@@ -780,11 +780,11 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 				$button_size = strtolower( $fusion_settings->get( 'button_size', false, 'medium' ) );
 
 				$attr = array(
-					'class' => 'fusion-login-button fusion-button button-default button-' . $button_size,
+					'class' => 'fusion-login-button submit_button fusion-button button-default button-' . $button_size,
 				);
 
 				if ( 'yes' != $this->args['button_fullwidth'] ) {
-					$attr['class'] .= ' fusion-login-button-no-fullwidth';
+					$attr['class'] .= 'submit_button fusion-login-button-no-fullwidth';
 				}
 
 				$attr['type'] = 'submit';
