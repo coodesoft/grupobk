@@ -26,16 +26,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php endif; ?>
 			<?php endif; ?>
 		</div>
-	
+
 	<?php
 	if (is_user_logged_in()) {
 	    $user = wp_get_current_user();
 	    if ( in_array( 'RRHH', (array) $user->roles ) ) {
-	        $items = '<div class="submenu"><ul style="margin-left:11%;margin-top:10px;margin-bottom:10px;">';
+	        $items = '<div class="submenu"><ul style="width:auto;max-width:1100px;margin:10px auto;display:flex;justify-content:space-between;">';
 	        $items .= '<li class="submenu-item"><a target="_self" rel="noopener noreferrer" href="'. home_url('/rrhh/') .' "><span class="menu-text">RRHH</span></a></li>';
 	        $items .= "</ul></div>";
 	    } else if ( in_array( 'customer', (array) $user->roles ) ){
-	    $items = '<div class="submenu"><ul style="margin-left:11%;margin-top:10px;margin-bottom:10px;">';
+	    $items = '<div class="submenu"><ul style="width:auto;max-width:1100px;margin:10px auto;display:flex;justify-content:space-between;">';
 	    $items .= '<li class="submenu-item"><a target="_self" rel="noopener noreferrer" href="'. home_url('/noticias/') .' "><span class="menu-text">Noticias</span></a></li>';
 	    $items .= '<li class="submenu-item"><a target="_self" rel="noopener noreferrer" href="'. home_url('/Descarga_nueva/') .' "><span class="menu-text">Descargas</span></a></li>';
 	    $items .= '<li class="submenu-item"><a target="_self" rel="noopener noreferrer" href="'. home_url('/catalogo') .' "><span class="menu-text">Pedidos</span></a></li>';
@@ -44,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	    }
 	 echo $items;
 	}
-	
+
 	?>
 	</div>
 </div> <!-- end fusion sticky header wrapper -->
