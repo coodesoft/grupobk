@@ -139,8 +139,8 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 					$html .= $this->render_notices( $action );
 
 					$html .= '<div class="fusion-login-input-wrapper">';
-					$html .= '<label class="fusion-hidden-content" for="user_login">' . esc_attr__( 'Usuario', 'fusion-builder' ) . '</label>';
-					$html .= '<input type="text" name="log" placeholder="' . esc_attr__( 'Usuario', 'fusion-builder' ) . '" value="' . esc_attr( $user_login ) . '" size="20" class="fusion-login-username input-text" id="user_login" />';
+					$html .= '<label class="fusion-hidden-content" for="user_login">' . esc_attr__( 'Email', 'fusion-builder' ) . '</label>';
+					$html .= '<input type="text" name="log" placeholder="' . esc_attr__( 'Email', 'fusion-builder' ) . '" value="' . esc_attr( $user_login ) . '" size="20" class="fusion-login-username input-text" id="user_login" />';
 					$html .= '</div>';
 
 					$html .= '<div class="fusion-login-input-wrapper">';
