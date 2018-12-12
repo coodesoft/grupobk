@@ -145,6 +145,8 @@ input.wpcf7-form-control.wpcf7-text.uploadtextfield {
     font-size: 100%!important;
 	text-transform:none!important;
 	margin-right:20px!important;
+	height: 40px;
+    width: fit-content;
 }
 
 .submit_button:hover {
@@ -749,9 +751,11 @@ h3.map-site {
     background-color: #f4f4f4!important;
 	margin-bottom: 25px;
 }
+
 .post-content{
 	margin-top: 20px;
 }
+
 .select-arrow{
 	right: 0px!important;
 	background-color: #f4f4f4!important;
@@ -765,27 +769,32 @@ h3.map-site {
 .fupload{
 	width:98%!important;
 }
+
 .products-3>li{
 	width: 31.6%!important;
 }
+
 .datos_user_cart{
 	display:flex;
 	padding-top:2%;
 }
+
 #sucursalSelection{
 	display:flex;
 	padding-left: 40%;
     padding-bottom: 1%;
-
 }
+
 #gbsCatalog{
     margin: auto;
 	padding-bottom: 1%;
 	padding-top: 1%;
 }
+
 .cart_style {
     border: solid 0.2px;
 }
+
 #selectCategoryForm{
 	margin-bottom: 3%;
 }
@@ -799,9 +808,11 @@ h3.map-site {
 	width:max-content;
 	height: 29px;
 }
+
 li.fusion-custom-menu-item.fusion-menu-cart.fusion-main-menu-cart.fusion-widget-cart-counter{
 	display: none;
 }
+
   #gbsCheckout{
     padding-top: 20px;
   }
@@ -825,13 +836,12 @@ li.fusion-custom-menu-item.fusion-menu-cart.fusion-main-menu-cart.fusion-widget-
     padding-top: 15px;
   }
 
-
   #gbsCheckout .total-ordered,
   #gbsCheckout .shop_table .product-name,
   #gbsCheckout .product_name .product-info,
   #gbsCheckout .user-actions{
     text-align: center;
-	
+
   }
 
   #gbsCheckout .user-actions{
@@ -854,6 +864,7 @@ li.fusion-custom-menu-item.fusion-menu-cart.fusion-main-menu-cart.fusion-widget-
     display: inline-block;
     margin-top: 20px;
   }
+
   .del_button {
   	height: 40px;
       width: 40px;
@@ -907,7 +918,7 @@ li.fusion-custom-menu-item.fusion-menu-cart.fusion-main-menu-cart.fusion-widget-
 }
 li.submenu-item{
 	display: inline-block;
-	margin: 0% 1%;
+	margin: 0% auto;
 }
 #clienteSelection{
 	margin-right: 1%;
@@ -985,4 +996,45 @@ p.demo_store{
 
 body.bk-progress{
   cursor: progress;
+}
+@media only screen and (max-width: 800px){
+	.products li{
+		float:left!important;
+	}
+	.datos_user_cart{
+		display:block;
+		margin-bottom: 5px;
+	}
+	#clienteSelection, .order-owner {
+		margin-bottom: 5px;
+	}
+	.shop_table .product-quantity{
+		display: table-cell!important;
+	}
+
+}
+
+input#user_pass{
+	text-indent: 10px;
+    display: block;
+    font-size: 1em;
+    color: #7c7c7c!important;
+    text-align: left;
+    font-family: 'myriad-set-pro-text'!important;
+    letter-spacing: -.3px;
+    width: 100%;
+    height: 45px!important;
+    padding: 0;
+    border-radius: 5px;
+    background-color: #f4f4f4!important;
+    margin-bottom: 25px;
+}
+/* estilo de usuario logueado */
+
+.woocomerce {
+    margin: 5% auto 7%;
+}
+
+#content {
+    margin: 5% 0;
 }
