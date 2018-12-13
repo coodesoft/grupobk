@@ -146,6 +146,8 @@ function uploadSucursal(){
     							<option value="Mendoza" >Mendoza</option>
     							<option value="Misiones" >Misiones</option>
     							<option value="Neuquen" >Neuquen</option>
+                  <option value="Rio Negro" >Rio Negro</option>
+                  <option value="Salta" >Salta</option>
     							<option value="San Juan" >San Juan</option>
     							<option value="San Luis" >San Luis</option>
     							<option value="Santa Cruz" >Santa Cruz</option>

@@ -53,6 +53,7 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 				add_filter( 'login_redirect', array( $this, 'login_redirect' ), 10, 3 );
 				add_filter( 'registration_errors', array( $this, 'registration_error_redirect' ), 10, 3 );
 
+
 				add_filter( 'fusion_attr_login-shortcode', array( $this, 'attr' ) );
 				add_filter( 'fusion_attr_login-shortcode-form', array( $this, 'form_attr' ) );
 				add_filter( 'fusion_attr_login-shortcode-button', array( $this, 'button_attr' ) );
@@ -347,9 +348,7 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 					if ( ! empty( $query_args ) ) {
 						$redirection_link = add_query_arg( $query_args, $redirection_link );
 					}
-//ESTO FUE MODIFICADO, DEBERIA SER esc_url($redirection_link) en lugar de: home_url( '/noticias/' )
 					$html .= '<input type="hidden" name="redirect_to" value="' . esc_url($redirection_link) . '" />';
-//FIN MODIFICADO
 					$html .= '<input type="hidden" name="fusion_login_box" value="true" />';
 
 				}
@@ -359,7 +358,18 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 				return $html;
 
 			}
+			//ESTA LA HICE YO
+			public function redirectByRole($user_role){
+				if (($user_role == "RRHH") || ($user_role == "customer")){
 
+							return home_url('/noticias');
+						}
+					else {
+						
+						return home_url('/wp-admin');
+					}
+			}
+			// FIN ESTA LA HICE YO
 			/**
 			 * Generates nonce field, used in AJAX request.
 			 *
@@ -477,6 +487,7 @@ if ( fusion_is_element_enabled( 'fusion_login' ) ||
 					check_admin_referer( 'fusion-login' );
 					// If we have no errors, remove the action query arg.
 					if ( ! isset( $user->errors ) ) {
+						$redirect_to = $this->redirectByRole($user->roles[0]);
 						return $redirect_to;
 					}
 

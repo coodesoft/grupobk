@@ -70,12 +70,13 @@ if ( 'modern' === Avada()->settings->get( 'mobile_menu_design' ) ) {
 ?>
 
 <body <?php body_class(); ?>>
-    <div class="log_in fusion-header" style="text-align:right; font-size:1.2em; width:90%">
+    <div class="log_in fusion-header col-md-offset-10" style="text-align:right; font-size:1.1em; width:90%; display:flex">
 	<?php
 	if (is_user_logged_in()) {
-			$items = '<a href="'.wp_logout_url(home_url()).'">Logout <img style="height:20px; width:25px;" src='. home_url("/img/salir.svg").'></a>';
+		$current_user = wp_get_current_user();
+			$items = '<a href="'.wp_logout_url(home_url()).'"> <p style="margin-top: 1px">Bienvenido, '. $current_user->user_login .' </p></a><a href="'.home_url('/login').'"><img style="height:20px; width:25px;" src='. home_url("/img/salir.svg").'></a>';
 	} else {
-			$items = '<a href="'.home_url('/login').'">Login <img style="height:20px; width:25px;" src='. home_url("/img/entrar.svg").'> </a>';
+			$items = '<a href="'.home_url('/login').'"> <p style="margin-top: 1px"> Login </p></a><a href="'.home_url('/login').'"><img style="height:20px; width:25px;" src='. home_url("/img/entrar.svg").'></a>';
 	}
 	echo $items;
 	?>
