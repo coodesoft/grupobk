@@ -1038,3 +1038,16 @@ input#user_pass{
 #content {
     margin: 5% 0;
 }
+
+body.page-template-default.page.page-id-1171.logged-in.woocommerce-cart.woocommerce-page.fusion-image-hovers.fusion-body.ltr.no-mobile-totop.mobile-logo-pos-center.layout-wide-mode.fusion-top-header.menu-text-align-center.fusion-woo-product-design-classic.mobile-menu-design-modern.fusion-show-pagination-text.do-animate {
+    height: auto!important;
+}
+
+.fusion-layout-column.fusion-column-last, .fusion-layout-column.fusion-column-first {
+    width: calc(50% - ( ( 4% ) * 0.5 ) )!important;
+}
+
+.login h1 a{
+	background-size: 120px!important;
+	width: 120px!important;
+}
