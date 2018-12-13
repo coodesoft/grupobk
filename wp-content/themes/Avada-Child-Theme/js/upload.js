@@ -126,11 +126,13 @@
 			let address = [], sucursal, cliente, features, featHtml;
 			resetMap();
 			for (var i = 0; i < sucursales.length; i++) {
-				sucursal = $(sucursales[i]);
-				cliente = sucursal.find('span').text();
-				features = sucursal.parent().find('.info');
-				featHtml = '<div class="info">'+features.html()+'</div>';
-				geocodeAddress([cliente, sucursal.data('address'), featHtml]);
+				setTimeout(function(){
+					sucursal = $(sucursales[i]);
+					cliente = sucursal.find('span').text();
+					features = sucursal.parent().find('.info');
+					featHtml = '<div class="info">'+features.html()+'</div>';
+					geocodeAddress([cliente, sucursal.data('address'), featHtml]);
+				}, 50);
 			}
 		});
 	});
