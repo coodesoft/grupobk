@@ -143,7 +143,7 @@ p {
 .login h1 a {
 	background-image: url(../images/w-logo-blue.png?ver=20131202);
 	background-image: none, url(../images/wordpress-logo.svg?ver=20131107);
-	background-size: 84px;
+	background-size: 120px;
 	background-position: center top;
 	background-repeat: no-repeat;
 	color: #444;
@@ -154,7 +154,7 @@ p {
 	margin: 0 auto 25px;
 	padding: 0;
 	text-decoration: none;
-	width: 84px;
+	width: 120px;
 	text-indent: -9999px;
 	outline: none;
 	overflow: hidden;
