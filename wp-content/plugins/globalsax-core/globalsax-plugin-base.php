@@ -69,7 +69,7 @@ class GLOBALSAX_Plugin_Base {
         wp_register_script('globalsax-script', plugins_url('/js/globalsax-script.js', __FILE__), array('jquery'), '1.0', true);
         wp_enqueue_script('globalsax-script');
 
-        wp_register_script('google-maps', 'https://maps.googleapis.com/maps/api/js');
+        wp_register_script('google-maps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyA-sMde0_QIgUq_tMtSqK0RamPViALBZSs');
         wp_enqueue_script('google-maps');
 
     }

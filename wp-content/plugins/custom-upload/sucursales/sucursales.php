@@ -183,7 +183,12 @@ function cu_add_sucursal(){
   wp_die();
 }
 
-
+add_action( 'wp_ajax_cu_get_all_sucursales', 'cu_get_all_sucursales' );
+function cu_get_all_sucursales(){
+  $sucursales = Clients::getSucursales();
+  echo json_encode($sucursales);
+  wp_die();
+}
 
 add_action('wp_ajax_load_prov', 'load_prov');
 add_action('wp_ajax_nopriv_load_prov', 'load_prov');

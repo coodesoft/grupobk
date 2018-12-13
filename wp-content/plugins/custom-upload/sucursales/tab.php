@@ -12,6 +12,7 @@ function sucursales(){
     <a href="<?= admin_url('admin.php?page='.$pluginPageUID.'&tab=sucursales&action=user')?>" class="nav-tab">Cargar clientes</a>
     <a href="<?= admin_url('admin.php?page='.$pluginPageUID.'&tab=sucursales&action=upload')?>" class="nav-tab">Cargar sucursal</a>
     <a href="<?= admin_url('admin.php?page='.$pluginPageUID.'&tab=sucursales&action=edit')?>" class="nav-tab">Editar características</a>
+    <a href="<?= admin_url('admin.php?page='.$pluginPageUID.'&tab=sucursales&action=geocode')?>" class="nav-tab">Geolocalizar Sucursales</a>
   </h2>
 
   <div class="panel-body">
@@ -30,13 +31,28 @@ function sucursales(){
 
     if ($activeTab == 'sucursales' && $action == 'edit')
       editFeatures();
+
+    if ($activeTab == 'sucursales' && $action == 'geocode')
+      geocodeSucursales();
+
     ?>
   </div>
 <?
 }
 
-function createCliente(){
-?>
+function geocodeSucursales(){ ?>
+  <div id="ucInstructions">
+    <p>Este proceso es complejo y puede llevar algunos minutos</p>
+  </div>
+  <div id="geocodeSucursal">
+     <button id="initGeocode" type="button">Geollocalizar</button>
+    <div class="geocode-progress"></div>
+  </div>
+<?php
+}
+
+
+function createCliente(){ ?>
   <div id="ucInstructions">
     <p>Ingrese el nombre del cliente que desea agregar.
        Luego diríjase a la pestaña "Cargar sucursal" para cargar las sucursales asociadas
@@ -95,9 +111,7 @@ function createCliente(){
 <?php
 }
 
-
-function uploadSucursal(){
-?>
+function uploadSucursal(){?>
   <div id="uploadSucursal">
 
     <div id="ucInstructions">
@@ -178,45 +192,44 @@ function uploadSucursal(){
 <?php
 }
 
-function editFeatures(){
-?>
-<div id="editFeatures">
-  <div id="ucInstructions">
-    <p>Edite las características de las sucursales checkeando las casillas</p>
-  </div>
-  <div id="actionResult" class="hidden"></div>
-
-  <form id="editFeaturesForm">
-    <table>
-      <tr>
-        <th>Cliente</th>
-        <th>Dirección</th>
-        <th>Visibilidad</th>
-        <th>Venta Mayorista</th>
-        <th>Venta Minorista</th>
-        <th>Venta online</th>
-        <th>Sitio Web</th>
-        <th>Revendedoras</th>
-      </tr>
-      <?php $sucursales = Clients::getSucursales(); ?>
-      <?php foreach ($sucursales as $key => $sucursal) { ?>
-      <tr>
-        <td><?php echo $sucursal['nombre_cliente'] ?></td>
-        <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][direccion_publica]" "type="text" value="<?php echo $sucursal['direccion_publica'] ?>"></td>
-        <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][visibilidad]" type="checkbox" <?php echo $sucursal['visibilidad'] ? 'checked' : '' ?> ></td>
-        <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][venta_mayorista]" type="checkbox" <?php echo $sucursal['venta_mayorista'] ? 'checked' : '' ?> ></td>
-        <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][venta_minorista]" type="checkbox" <?php echo $sucursal['venta_minorista'] ? 'checked' : '' ?> ></td>
-        <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][venta_online]" type="checkbox" <?php echo $sucursal['venta_online'] ? 'checked' : '' ?> ></td>
-        <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][sitio_web]" type="checkbox" <?php echo $sucursal['sitio_web'] ? 'checked' : '' ?> ></td>
-        <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][revendedoras]" type="checkbox" <?php echo $sucursal['revendedoras'] ? 'checked' : '' ?> ></td>
-      </tr>
-      <?php } ?>
-    </table>
-    <div class="cu-submit-button cu-text-center">
-      <button type="submit">Editar características</button>
-      <div class="cu-loader"></div>
+function editFeatures(){?>
+  <div id="editFeatures">
+    <div id="ucInstructions">
+      <p>Edite las características de las sucursales checkeando las casillas</p>
     </div>
-  </form>
-</div>
+    <div id="actionResult" class="hidden"></div>
+
+    <form id="editFeaturesForm">
+      <table>
+        <tr>
+          <th>Cliente</th>
+          <th>Dirección</th>
+          <th>Visibilidad</th>
+          <th>Venta Mayorista</th>
+          <th>Venta Minorista</th>
+          <th>Venta online</th>
+          <th>Sitio Web</th>
+          <th>Revendedoras</th>
+        </tr>
+        <?php $sucursales = Clients::getSucursales(); ?>
+        <?php foreach ($sucursales as $key => $sucursal) { ?>
+        <tr>
+          <td><?php echo $sucursal['nombre_cliente'] ?></td>
+          <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][direccion_publica]" "type="text" value="<?php echo $sucursal['direccion_publica'] ?>"></td>
+          <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][visibilidad]" type="checkbox" <?php echo $sucursal['visibilidad'] ? 'checked' : '' ?> ></td>
+          <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][venta_mayorista]" type="checkbox" <?php echo $sucursal['venta_mayorista'] ? 'checked' : '' ?> ></td>
+          <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][venta_minorista]" type="checkbox" <?php echo $sucursal['venta_minorista'] ? 'checked' : '' ?> ></td>
+          <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][venta_online]" type="checkbox" <?php echo $sucursal['venta_online'] ? 'checked' : '' ?> ></td>
+          <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][sitio_web]" type="checkbox" <?php echo $sucursal['sitio_web'] ? 'checked' : '' ?> ></td>
+          <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][revendedoras]" type="checkbox" <?php echo $sucursal['revendedoras'] ? 'checked' : '' ?> ></td>
+        </tr>
+        <?php } ?>
+      </table>
+      <div class="cu-submit-button cu-text-center">
+        <button type="submit">Editar características</button>
+        <div class="cu-loader"></div>
+      </div>
+    </form>
+  </div>
 <?php
 }

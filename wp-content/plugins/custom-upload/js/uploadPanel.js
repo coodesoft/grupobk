@@ -59,6 +59,23 @@
     }
   }
 
+// ####################################################################
+
+  var codeAddress = function(address) {
+    geocoder.geocode( { 'address': location[1]}, function(results, status) {
+      //alert(status);
+     if (status == google.maps.GeocoderStatus.OK) {
+
+       //alert(results[0].geometry.location);
+       map.setCenter(results[0].geometry.location);
+       createMarker(results[0].geometry.location,location[0]+"<br>"+location[1]+"<br>"+location[2]);
+     }
+     else
+     {
+       alert("some problem in geocode" + status);
+     }
+   });
+  }
 
   var loadUserContentCallback = function(form, action, target, callback){
     var data = {
@@ -197,6 +214,16 @@
         });
       }
     });
+
+    $(root).on('click', '#initGeocode', function(){
+      loadUserContentCallback('', 'cu_get_all_sucursales', '', function(data){
+        data = JSON.parse(data);
+
+        for (var i = 0; i < data.length; i++) {
+          console.log(data[i]);
+        }
+      })
+    })
 
     let controller = new UploadController();
     let nav = new Navigator();
