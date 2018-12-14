@@ -20,34 +20,24 @@
 		markers = [];
 	}
 
-  function codeAddress(address) {
-     geocoder.geocode( { 'address': address}, function(results, status) {
-       if (status == 'OK') {
-         map.setCenter(results[0].geometry.location);
-         var marker = new google.maps.Marker({
-             map: map,
-             position: results[0].geometry.location
-         });
-       } else {
-         alert('Geocode was not successful for the following reason: ' + status);
-       }
-     });
-  }
+	function loadMapIndicator(address, featHtmlArr){
+		var data = {
+			'geodata': address,
+			'action': 'cu_get_geocode_sucursales',
+		}
+		$.post(ajaxurl, data, function(data){
+			let latlng, aditionalInfo;
+			if (data){
+				data = JSON.parse(data);
+				for (var i = 0; i < data.length; i++) {
+					latlng = {lat: parseFloat(data[i]['lat']), lng: parseFloat(data[i]['long'])};
+					map.setCenter(latlng);
 
-	function geocodeAddress(location) {
-	  geocoder.geocode( { 'address': location[1]}, function(results, status) {
-	  //alert(status);
-	    if (status == google.maps.GeocoderStatus.OK) {
-
-	      //alert(results[0].geometry.location);
-	      map.setCenter(results[0].geometry.location);
-	      createMarker(results[0].geometry.location,location[0]+"<br>"+location[1]+"<br>"+location[2]);
-	    }
-	    else
-	    {
-	      alert("some problem in geocode" + status);
-	    }
-	  });
+					aditionalInfo = featHtmlArr[data[i]['id']][1] + "<br />" + featHtmlArr[data[i]['id']][0] + "<br />" + featHtmlArr[data[i]['id']][2];
+					createMarker(latlng, aditionalInfo);
+				}
+			}
+		});
 	}
 
 	function createMarker(latlng,html){
@@ -57,12 +47,12 @@
 	  });
 		markers.push(marker);
 
-	  google.maps.event.addListener(marker, 'mouseover', function() {
+	  google.maps.event.addListener(marker, 'click', function() {
 	    infowindow.setContent(html);
 	    infowindow.open(map, marker);
 	  });
 
-	  google.maps.event.addListener(marker, 'mouseout', function() {
+	  google.maps.event.addListener(infowindow, 'closeclick', function() {
 	    infowindow.close();
 	  });
 	}
@@ -123,15 +113,20 @@
 			$('body').removeClass('bk-progress');
 
 			let sucursales = $('.nombre_cliente');
-			let address = [], sucursal, cliente, features, featHtml;
+			let address = [], featHtmlAddress = [];
+			let sucursal, cliente, features, featHtml;
 			resetMap();
 			for (var i = 0; i < sucursales.length; i++) {
 					sucursal = $(sucursales[i]);
 					cliente = sucursal.find('span').text();
 					features = sucursal.parent().find('.info');
 					featHtml = '<div class="info">'+features.html()+'</div>';
-					geocodeAddress([cliente, sucursal.data('address'), featHtml]);
+
+					address[i] = sucursal.data('id');
+					featHtmlAddress[sucursal.data('id')] = [featHtml, cliente, sucursal.data('address')];
 			}
+			if (sucursales.length)
+				loadMapIndicator(address, featHtmlAddress);
 		});
 	});
 
@@ -142,15 +137,20 @@
 			$('body').removeClass('bk-progress');
 
 			let sucursales = $('.nombre_cliente');
-			let address = [], sucursal, cliente, features, featHtml;
+			let address = [], featHtmlAddress = [];
+			let sucursal, cliente, features, featHtml;
 			resetMap();
 			for (var i = 0; i < sucursales.length; i++) {
-				sucursal = $(sucursales[i]);
-				cliente = sucursal.find('span').text();
-				features = sucursal.parent().find('.info');
-				featHtml = '<div class="info">'+features.html()+'</div>';
-				geocodeAddress([cliente, sucursal.data('address'), featHtml]);
+					sucursal = $(sucursales[i]);
+					cliente = sucursal.find('span').text();
+					features = sucursal.parent().find('.info');
+					featHtml = '<div class="info">'+features.html()+'</div>';
+
+					address[i] = sucursal.data('id');
+					featHtmlAddress[sucursal.data('id')] = [featHtml, cliente, sucursal.data('address')];
 			}
+			if (sucursales.length)
+				loadMapIndicator(address, featHtmlAddress);
 		});
 	});
 

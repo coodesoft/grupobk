@@ -20,7 +20,7 @@ function buildLocalesListHTML($sucursales){
       <div class="ciudad bk-pointer"> <?php echo $ciudad ?> </div>
       <?php foreach ($sucursales as $k => $v) { ?>
         <div id="hidden-info" class="sucursal">
-          <div class="nombre_cliente" data-address="<?php echo $v['direccion_publica'].",".$v['ciudad'].",".$v['provincia'].",Argentina" ?>">
+          <div class="nombre_cliente" data-id="<?php echo $v['id'] ?>" data-address="<?php echo $v['direccion_publica'].",".$v['ciudad'].",".$v['provincia'].",Argentina" ?>">
              <span><?php echo $v['nombre_cliente'] ?></span>
           </div>
           <div class="direccion_publica"> <?php echo $v['direccion_publica'] ?> </div>
@@ -190,6 +190,17 @@ function cu_get_all_sucursales(){
   wp_die();
 }
 
+add_action( 'wp_ajax_cu_get_geocode_sucursales', 'cu_get_geocode_sucursales' );
+function cu_get_geocode_sucursales(){
+  $ids = $_POST['geodata'];
+  if (count($ids)){
+    $sucursales = Clients::getGeocodeSucursales($ids);
+    echo json_encode($sucursales);
+  }
+  wp_die();
+}
+
+
 add_action('wp_ajax_load_prov', 'load_prov');
 add_action('wp_ajax_nopriv_load_prov', 'load_prov');
 function load_prov(){
@@ -252,5 +263,22 @@ function cu_edit_features(){
 
   $return['response'] = '<p>'. $msg .'</p>';
   echo json_encode($return);
+  wp_die();
+}
+
+
+add_action('wp_ajax_cu_geocode_sucursales', 'cu_geocode_sucursales' );
+function cu_geocode_sucursales(){
+  $results = $_POST['data'];
+
+  $errors = [];
+
+  foreach ($results as $key => $result) {
+    $status = Clients::updateSucursalGeocode($result);
+    if ($status === false){
+      $errors[] = ['id' => $result[0]];
+    }
+  }
+  echo json_encode(['response' => $errors]);
   wp_die();
 }

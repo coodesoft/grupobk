@@ -13,31 +13,6 @@ class Clients{
   }
 
   static function update($id, $name){
-/*
-    global $wpdb;
-
-    return $wpdb->update(self::TABLE, ['nombre_cliente' => $name], ['cliente_id' => $id], ['%s'], ['%d']);
-  }
-
-  static function delete($id){
-    global $wpdb;
-
-    $wpdb->query('START TRANSACTION');
-    $result = $wpdb->delete( self::TABLE, ['cliente_id' => $id], ['%d'] );
-    $related = $wpdb->delete( self::RELATED, ['cliente_id' => $id], ['%d'] );
-
-    if ($result !== false && $related !== false){
-      $wpdb->query('COMMIT');
-      return true;
-    } else{
-      $wpdb->query('ROLLBACK');
-      return false;
-    }
-  }
-
-  static function addSucursal($cliente_id, $sucursal_id){*/
-
-
     global $wpdb;
 
     return $wpdb->update(self::TABLE, ['nombre_cliente' => $name], ['cliente_id' => $id], ['%s'], ['%d']);
@@ -71,7 +46,7 @@ class Clients{
    $types = array( '%d', '%s', '%s', '%s', '%s' );
 
    return $wpdb->insert(self::RELATED, $values, $types);
- }
+  }
 
   static function updateSucursalFeature($params, $cliente_id, $sucursal_id){
     global $wpdb;
@@ -85,6 +60,11 @@ class Clients{
     }
 
     return $wpdb->update(self::RELATED, $params, ['id' => $sucursal_id, 'cliente_id' => $cliente_id], $types, ['%d', '%d']);
+  }
+
+  static function updateSucursalGeocode($params){
+    global $wpdb;
+    return $wpdb->update(self::RELATED, ['lat' => $params[1], 'long' => $params[2]], ['id' => $params[0]], ['%s'], ['%s']);
   }
 
   static function getAll(){
@@ -120,6 +100,17 @@ class Clients{
     $queryStr.= ' RIGHT JOIN '. self::RELATED .' ON '. self::TABLE .'.cliente_id='. self::RELATED .'.cliente_id';
 
     return $wpdb->get_results($queryStr, ARRAY_A);
+  }
+
+  static function getGeocodeSucursales($ids){
+    global $wpdb;
+
+    $placeholders = array_fill(0, count($ids), '%d');
+    $format = implode(', ', $placeholders);
+
+    $queryStr = 'SELECT id, lat, '.self::RELATED.'.long FROM '. self::RELATED .' WHERE id IN ('.$format.')';
+
+    return $wpdb->get_results($wpdb->prepare($queryStr, $ids), ARRAY_A);
   }
 
   static function getSucursalesByProvincia($provincia){

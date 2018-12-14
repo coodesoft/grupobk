@@ -61,25 +61,6 @@
 
 // ####################################################################
 
-  var geocoder = new google.maps.Geocoder();
-
-  var geocodeAddress = function(address) {
-    geocoder.geocode( { 'address': address}, function(results, status) {
-      //alert(status);
-     if (status == google.maps.GeocoderStatus.OK) {
-
-       //alert(results[0].geometry.location);
-       let lat = results[0].geometry.location.lat;
-       let long = results[0].geometry.location.long;
-       console.log(lat+","+long);
-       return [lat, long];
-     }
-     else{
-       alert("Veniamos bien, pero pasaron cosas: " + status);
-     }
-   });
-  }
-
   var loadUserContentCallback = function(form, action, target, callback){
     var data = {
       'user': $(form).serialize(),
@@ -117,7 +98,15 @@
     $('#actionResult').html(msg);
   }
 
-  var geocodeSucursales = function(i, sucursales, cant, results){
+  var geocodeResults = [];
+
+  var geocoder = new google.maps.Geocoder();
+  /*
+    Nota: Se añaden los timeout debido a que la api de google responde que se alcanza
+    el limite de peticiones por segundo. Con los timeout garantizamos que se disminuyan
+    la cantidad de respuestas de error.
+  */
+  var geocodeSucursales = function(i, sucursales, cant, results, progressTarget, resultTarget){
     if (i<cant){
         let sucursal = sucursales[i];
         let location = sucursal['direccion_real']+","+sucursal['ciudad']+","+sucursal['provincia']+",Argentina";
@@ -126,21 +115,48 @@
          if (status == google.maps.GeocoderStatus.OK) {
 
            let lat = response[0].geometry.location.lat();
-           let long = response[0].geometry.location.lng();
-           results[sucursal['id']] = [lat, long, location];
+           let lng = response[0].geometry.location.lng();
+
+           results[i] = [ sucursal['id'], lat, lng ];
 
            setTimeout(function(){
-             console.log('Geolocalizando sucursal '+i+' de '+cant);
              i++;
-             return geocodeSucursales(i, sucursales, cant, results);
+             $(progressTarget).html('<p>Geolocalizando sucursal ' + i + ' de '+cant+'</p>');
+             geocodeSucursales(i, sucursales, cant, results, progressTarget, resultTarget);
+           }, 500);
+         }
+         else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+           setTimeout(function(){
+              $(progressTarget).html('<p>Se produjo un error geolocalizando la sucursal '+ i+'</p>');
+              $(progressTarget).append('<p>Reintentando...</p>');
+              $(progressTarget).append('<p>Geolocalizando sucursal ' + i + ' de '+cant+'</p>');
+              geocodeSucursales(i, sucursales, cant, results, progressTarget, resultTarget);
            }, 1000);
          }
-         else{
-           alert("Veniamos bien, pero pasaron cosas: " + status);
-         }
        });
-  } else
-    return results;
+  } else{
+    var data = {
+      'data': results,
+      'action': 'cu_geocode_sucursales',
+    }
+    $.post(ajaxurl, data, function(data){
+      data = JSON.parse(data);
+      $(progressTarget).append('<p>PROCESO DE GEOLOCALIZACIÓN FINALIZADO</p>')
+
+      if (data['response'] != undefined){
+        $('#actionResult').removeClass('hidden');
+        if (data['response'].length){
+          $('#actionResult').addClass('gbs-error');
+          $(resultTarget).html('Se produjo uno o mas errores al actualizar la base de datos. Contáctese con el administrador.');
+        }else{
+          $('#actionResult').addClass('gbs-success');
+          $(resultTarget).html('Se completó exitosamente el proceso de geolocalización');
+        }
+        $('body').removeClass('cu-progress');
+      }
+    })
+  }
+
   }
 
   $(document).ready(function(){
@@ -156,10 +172,13 @@
     });
 
     $(root).on('click', '#initGeocode', function(){
+      $('body').addClass('cu-progress');
       loadUserContentCallback('', 'cu_get_all_sucursales', '', function(data){
         data = JSON.parse(data);
-        let result = geocodeSucursales(0, data, data.length, []);
-        console.log(result);
+        let geocodeProgress = '.geocode-progress .bodyProgress';
+        let geocodeResultTarget = '#actionResult';
+        $('.geocode-progress .headerProgress').html('<p>INICIANDO PROCESO DE GEOLOCALIZACIÓN</p>');
+        geocodeSucursales(0, data, data.length, geocodeResults, geocodeProgress, geocodeResultTarget);
       })
     });
 
