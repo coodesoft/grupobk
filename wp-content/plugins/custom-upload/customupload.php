@@ -130,7 +130,8 @@ add_action('admin_menu', 'cu_admin_menu');
 
 
 function cu_load_scripts() {
-	wp_enqueue_script( 'customUploadPanelJS', plugins_url('/js/uploadPanel.js', __FILE__) );
+  wp_enqueue_script( 'google-maps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyA-sMde0_QIgUq_tMtSqK0RamPViALBZSs', array(), '', true);
+	wp_enqueue_script( 'customUploadPanelJS', plugins_url('/js/uploadPanel.js', __FILE__), array('google-maps'), '1.1', true);
 }
 
 function cu_load_stylesheet($hook){

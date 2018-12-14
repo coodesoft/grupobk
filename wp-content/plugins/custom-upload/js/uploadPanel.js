@@ -61,18 +61,21 @@
 
 // ####################################################################
 
-  var codeAddress = function(address) {
-    geocoder.geocode( { 'address': location[1]}, function(results, status) {
+  var geocoder = new google.maps.Geocoder();
+
+  var geocodeAddress = function(address) {
+    geocoder.geocode( { 'address': address}, function(results, status) {
       //alert(status);
      if (status == google.maps.GeocoderStatus.OK) {
 
        //alert(results[0].geometry.location);
-       map.setCenter(results[0].geometry.location);
-       createMarker(results[0].geometry.location,location[0]+"<br>"+location[1]+"<br>"+location[2]);
+       let lat = results[0].geometry.location.lat;
+       let long = results[0].geometry.location.long;
+       console.log(lat+","+long);
+       return [lat, long];
      }
-     else
-     {
-       alert("some problem in geocode" + status);
+     else{
+       alert("Veniamos bien, pero pasaron cosas: " + status);
      }
    });
   }
@@ -114,6 +117,32 @@
     $('#actionResult').html(msg);
   }
 
+  var geocodeSucursales = function(i, sucursales, cant, results){
+    if (i<cant){
+        let sucursal = sucursales[i];
+        let location = sucursal['direccion_real']+","+sucursal['ciudad']+","+sucursal['provincia']+",Argentina";
+
+        geocoder.geocode( { 'address': location}, function(response, status) {
+         if (status == google.maps.GeocoderStatus.OK) {
+
+           let lat = response[0].geometry.location.lat();
+           let long = response[0].geometry.location.lng();
+           results[sucursal['id']] = [lat, long, location];
+
+           setTimeout(function(){
+             console.log('Geolocalizando sucursal '+i+' de '+cant);
+             i++;
+             return geocodeSucursales(i, sucursales, cant, results);
+           }, 1000);
+         }
+         else{
+           alert("Veniamos bien, pero pasaron cosas: " + status);
+         }
+       });
+  } else
+    return results;
+  }
+
   $(document).ready(function(){
 
     let root = '#customUploadPanel';
@@ -124,6 +153,14 @@
       $('#filesPermissionTable').html(loader);
       loadUserContentCallback(this, 'load_permission', '#filesPermissionTable');
 
+    });
+
+    $(root).on('click', '#initGeocode', function(){
+      loadUserContentCallback('', 'cu_get_all_sucursales', '', function(data){
+        data = JSON.parse(data);
+        let result = geocodeSucursales(0, data, data.length, []);
+        console.log(result);
+      })
     });
 
     $(root).on('submit', '#downloadsByClientForm', function(e){
@@ -215,16 +252,6 @@
       }
     });
 
-    $(root).on('click', '#initGeocode', function(){
-      loadUserContentCallback('', 'cu_get_all_sucursales', '', function(data){
-        data = JSON.parse(data);
-
-        for (var i = 0; i < data.length; i++) {
-          console.log(data[i]);
-        }
-      })
-    })
-
     let controller = new UploadController();
     let nav = new Navigator();
 
@@ -232,5 +259,4 @@
     controller.run();
     nav.run();
   })
-}
-)(jQuery);
+})(jQuery);

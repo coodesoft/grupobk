@@ -45,7 +45,7 @@ function geocodeSucursales(){ ?>
     <p>Este proceso es complejo y puede llevar algunos minutos</p>
   </div>
   <div id="geocodeSucursal">
-     <button id="initGeocode" type="button">Geollocalizar</button>
+     <button id="initGeocode" type="button">Geolocalizar</button>
     <div class="geocode-progress"></div>
   </div>
 <?php

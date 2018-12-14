@@ -25,17 +25,19 @@ require_once 'permissions/permission.php';
 
 
 function cu_load_scripts() {
-	wp_enqueue_script( 'customUploadPanelJS', plugins_url('/js/uploadPanel.js', __FILE__) );
-}
+	wp_enqueue_script( 'customUploadPanelJS', plugins_url('/js/uploadPanel.js', __FILE__) ,array(), '', true );
+	wp_enqueue_script( 'google-maps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyA-sMde0_QIgUq_tMtSqK0RamPViALBZSs' ,array(), '', true);
+
+	}
 
 function addCustomUploadMenu(){
   add_menu_page('Custom Upload', 'Custom Upload', 'manage_options', 'global_custom_upload', 'global_custom_upload_content');
 }
 
 function cu_load_stylesheet($hook){
-	if($hook != 'toplevel_page_global_custom_upload') {
-  	return;
-  }
+	if($hook != 'toplevel_page_global_custom_upload')
+		return;
+
 	wp_enqueue_style( 'customUploadPanelCSS',  plugins_url('/css/uploadPanel.css', __FILE__) );
 }
 
