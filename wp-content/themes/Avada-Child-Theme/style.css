@@ -1043,7 +1043,7 @@ body.page-template-default.page.page-id-1171.logged-in.woocommerce-cart.woocomme
     height: auto!important;
 }
 
-.fusion-layout-column.fusion-column-last, .fusion-layout-column.fusion-column-first {
+.fusion-layout-column.fusion_builder_column.fusion_builder_column_1_2.fusion-one-half.fusion-column-first, .fusion-layout-column.fusion_builder_column.fusion_builder_column_1_2.fusion-one-half.fusion-column-last {
     width: calc(50% - ( ( 4% ) * 0.5 ) )!important;
 }
 
