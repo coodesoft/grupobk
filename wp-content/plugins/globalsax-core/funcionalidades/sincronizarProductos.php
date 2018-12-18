@@ -9,7 +9,7 @@ add_action('wp_ajax_nopriv_get_sincronizar_producto','get_sincronizar_producto')
 
 function ajax_get_sincronizar_producto(){
 	//update_user_meta(1,'importar_productos',-99);
-	
+
 	get_sincronizar_producto();
   //console_log('funciona');
 }
@@ -111,7 +111,7 @@ function insert_products ($products){
 function insert_product($product_data){
 
 	$IdWp = get_user_meta(1,'key_'.$product_data['Product_Id'], true);
-	echo $IdWp ." - "; 
+	echo $IdWp ." - ";
 
 	if( !isset($IdWp) || empty($IdWp)){
 
@@ -141,7 +141,7 @@ function insert_product($product_data){
 
 		$post_id = wp_update_post($post);
 		$product_category = $product_data['Category'];
-		
+
 		borrarVariacionesProductos($post_id);
 	}
 
@@ -286,7 +286,7 @@ function insert_product_variations ($post_id, $variations){
           update_post_meta($variation_post_id, 'attribute_pa_'.$attribute, $attribute_term->slug);
           // Again without variables: update_post_meta(25, 'attribute_pa_size', 'small')
         }
-
+				update_post_meta($variation_post_id, 'attribute_pa_order', $variation['order']);
         update_post_meta($variation_post_id, '_price', $variation['price']);
         update_post_meta($variation_post_id, '_regular_price', $variation['price']);
         update_post_meta($variation_post_id, '_sku', $variation['ProductVariation_Id']);
@@ -464,13 +464,13 @@ function get_variations($product_data){
 				$string = $string.'{ "attributes": {';
 				$string = $string.'"'.strtolower($attribute1['AttributeName']).'"  : "'.$attribute1['AttributeValue'].'",';
 				$string = $string.'"'.strtolower($attribute2['AttributeName']).'"  : "'.$attribute2['AttributeValue'].'"';
-				$string = $string.'},"price" : "99.00","ProductVariation_Id" : "'.$attribute2['ProductVariation_Id'].'"},';
+				$string = $string.'},"price" : "99.00","order" : "'. $attribute2["Order"] .'","ProductVariation_Id" : "'.$attribute2['ProductVariation_Id'].'"},';
 			}
 		}
 		else{
 			$string = $string.'{ "attributes": {';
 			$string = $string.'"'.strtolower($attribute1['AttributeName']).'"  : "'.$attribute1['AttributeValue'].'"';
-			$string = $string.'},"price" : "99.00"},"ProductVariation_Id" : "'.$attribute1['ProductVariation_Id'].'"},';
+			$string = $string.'},"price" : "99.00","order" : "'. $attribute2["Order"] .'"},"ProductVariation_Id" : "'.$attribute1['ProductVariation_Id'].'"},';
 		}
 	}
 	$string = substr($string, 0, -1);
