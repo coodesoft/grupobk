@@ -69,6 +69,8 @@ function gbs_load_variations(){
     $variations = get_posts( $args );
 
     $varMeta = gbsBuildVariationArray($variations);
+    //echo json_encode($varMeta);
+    wp_die();
     echo gbs_variation_table($varMeta, $id, $product->get_name(), $cartItems);
   } else{
     echo gbs_simple_product_table($product->get_id(), $cartItems);
@@ -260,6 +262,7 @@ function gbs_catalog(){
     <div id="gbs_productos_list"></div>
   </div>
 <?php }
+
 function gbs_products_list($products, $cartItems){ ?>
 
   <ul class="products products-3">
@@ -287,6 +290,7 @@ function gbs_products_list($products, $cartItems){ ?>
   </ul>
 
 <?php }
+
 function gbs_variation_table($varMeta, $parentId, $parentName, $inverseCartItems){
   $talles = $varMeta['talles'];
   $variations = $varMeta['variations'];
@@ -322,6 +326,7 @@ function gbs_variation_table($varMeta, $parentId, $parentName, $inverseCartItems
     <button id="gbsAddVariationToCartButton" class="wpcf7-form-control wpcf7-submit submit_button" style="padding: 10px 10px !important">Agregar al carrito</button>
   </form>
 <?php }
+
 function gbs_simple_product_table($idProduct, $inverseCartItems){ ?>
   <?php
     $key = isset($inverseCartItems[$idProduct]) ? $inverseCartItems[$idProduct] : 0;
@@ -340,22 +345,26 @@ function gbs_simple_product_table($idProduct, $inverseCartItems){ ?>
   </form>
 
 <?php }
+
 /* FUNCIONES ESTRUCTURALES */
 function gbsBuildVariationArray($variations){
   $arrVariations = [];
-  $talles = [];
+  $orders = [];
   foreach ($variations as $key => $variation) {
     $metadata = get_post_meta($variation->ID);
     $talle = $metadata['attribute_pa_talle'][0];
     $color = $metadata['attribute_pa_color'][0];
-    $talles[$talle] = 1;
-    $arrVariations[$color][$talle] = $variation->ID;
+    $order = $metadata['attribute_pa_order'][0];
+    $talles[] = ['talle' => $talle, 'order' => $order];
+    $arrVariations[$color][] = ['talle' => $talle, 'variation_id' => $variation->ID, 'order' => $order];
   }
-  ksort($talles);
+  ksort($orders);
   $varMeta['talles'] = $talles;
-  $varMeta['variations'] = gbsOrderVariationArrByTalle($arrVariations);
+  $varMeta['variations'] = $arrVariations;
+  echo json_encode($varMeta);
   return $varMeta;
 }
+
 function gbsOrderVariationArrByTalle($arrVariations){
   $tmp = [];
   foreach ($arrVariations as $key => $vari) {
