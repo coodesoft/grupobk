@@ -4,7 +4,7 @@ require_once(__DIR__ . '/../db/Clients.php');
 
 /* Con esta variable se puede sustituir facilmente la ruta base de las imágenes
    sin tener que modificar TODAS las rutas, una por una. */
-$imgBasePath = '/grupobk/img/';
+$imgBasePath = home_url('/img/');
 
 function buildLocalesListHTML($sucursales){
   global $imgBasePath;
