@@ -23,6 +23,7 @@ function gbs_get_categories(){
 }
 add_action( 'wp_ajax_nopriv_gbs_get_products_by_category', 'gbs_get_products_by_category' );
 add_action( 'wp_ajax_gbs_get_products_by_category', 'gbs_get_products_by_category' );
+
 function gbs_get_products_by_category(){
   $params = array();
   parse_str($_POST['data'], $params);
@@ -46,6 +47,7 @@ function gbs_get_products_by_category(){
 }
 add_action( 'wp_ajax_nopriv_gbs_load_variations', 'gbs_load_variations' );
 add_action( 'wp_ajax_gbs_load_variations', 'gbs_load_variations' );
+
 function gbs_load_variations(){
 
   $id = $_POST['product_id'];
@@ -70,7 +72,6 @@ function gbs_load_variations(){
 
     $varMeta = gbsBuildVariationArray($variations);
     //echo json_encode($varMeta);
-    wp_die();
     echo gbs_variation_table($varMeta, $id, $product->get_name(), $cartItems);
   } else{
     echo gbs_simple_product_table($product->get_id(), $cartItems);
@@ -80,12 +81,12 @@ function gbs_load_variations(){
 }
 add_action( 'wp_ajax_nopriv_gbs_add_variations_to_cart', 'gbs_add_variations_to_cart' );
 add_action( 'wp_ajax_gbs_add_variations_to_cart', 'gbs_add_variations_to_cart' );
+
 function gbs_add_variations_to_cart(){
   $variations = array();
   parse_str($_POST['data'], $variations);
 
   $safe_parent = intval($variations['Product']);
-
   //echo json_encode($variations); throw new \Exception("Error Processing Request", 1);
 
 
@@ -158,6 +159,9 @@ function gbs_add_variations_to_cart(){
   }
   wp_die();
 }
+
+
+
 /* FUNCIONES PARA REALIZAR UN PEDIDO */
 add_action( 'wp_ajax_nopriv_gbs_create_order', 'gbs_create_order' );
 add_action( 'wp_ajax_gbs_create_order', 'gbs_create_order' );
@@ -205,6 +209,7 @@ function gbs_create_order(){
     echo json_encode(['status' => 'gbs-error', 'msg' => 'Se ha producido un error al procesar el pedido', 'WSResult' => $result, 'ws_json' => $ws_json]);
   wp_die();
 }
+
 function gbs_biuld_ws_object($user_id, $adicionales, $order){
   $detalle = [];
   $data = [];
@@ -243,6 +248,32 @@ function gbs_biuld_ws_object($user_id, $adicionales, $order){
     $params['SucName'] = $adicionales['sucursal'];
   return $params;
 }
+
+
+add_action('wp_ajax_get_do_checkout', 'get_do_checkout');
+add_action('wp_ajax_nopriv_get_do_checkout', 'get_do_checkout');
+function get_do_checkout(){
+     $sucursales = get_user_meta(($_POST['user']),'id_sucursal', false);
+				if (sizeof($sucursales)>= 1) { ?>
+				<div id="sucursalSelection cuatrocol">
+		            <div>Seleccione la sucursal:</div>
+		            <div id="sucursalesList">
+		              <select name="sucursal" required>
+		                  <option value="" disabled selected>Seleccione una sucursal</option>
+    								  <?php	foreach ($sucursales as $key => $sucursal) { ?>
+											<option value="<?php echo $sucursal?>"><?php echo $sucursal?></option>
+										  <?php }?>
+		              </select>
+		            </div>
+		            </div>
+				<?php } else{ ?>
+					<input type="hidden" name="sucursal" value="gbs_noSucursal">
+				<?php }
+				wp_die();
+}
+
+
+
 /* FUNCIONES INTERNAS DE RETORNO */
 function gbs_catalog(){
   $categories = gbs_get_categories();
@@ -300,23 +331,23 @@ function gbs_variation_table($varMeta, $parentId, $parentName, $inverseCartItems
     <table>
       <tr>
         <th></th>
-        <?php foreach ($talles as $index => $talle): ?>
-        <th><?php echo $index ?></th>
+        <?php foreach ($talles as $index => $element): ?>
+        <th data-order="<?php echo $element['order']?>"><?php echo $element['talle'] ?></th>
         <?php endforeach; ?>
       </tr>
 
       <?php foreach ($variations as $color => $meta): ?>
       <tr>
         <td class="gbs_tag"><?php echo strtoupper($color)?></td>
-        <?php foreach ($meta as $talle => $IdVariation): ?>
+        <?php foreach ($meta as $id => $Variation): ?>
 
         <?php
-          $key = isset($inverseCartItems[$IdVariation]) ? $inverseCartItems[$IdVariation] : 0;
+          $key = isset($inverseCartItems[$Variation['id']]) ? $inverseCartItems[$Variation['id']] : 0;
           $value = $key ? WC()->cart->get_cart_item($key)['quantity'] : 0;
         ?>
-        <td class="gbs_data" data-color="<?php echo $color ?>" data-talle="<?php echo $talle ?>">
-          <input step="2" min="0" type="number" name="Variation[<?php echo $IdVariation ?>][qty]" data-variation="<?php echo $IdVariation ?>" value="<?php echo $value ?>">
-          <input type="hidden" name="Variation[<?php echo $IdVariation ?>][key]" value="<?php echo $key?>">
+        <td class="gbs_data" data-order="<?php echo $Variation['order'] ?>" data-color="<?php echo $color ?>" data-talle="<?php echo $Variation['talle'] ?>">
+          <input step="2" min="0" type="number" name="Variation[<?php echo $Variation['id'] ?>][qty]" data-variation="<?php echo $Variation['id'] ?>" value="<?php echo $value ?>">
+          <input type="hidden" name="Variation[<?php echo $Variation['id'] ?>][key]" value="<?php echo $key?>">
         </td>
         <?php endforeach; ?>
       </tr>
@@ -355,47 +386,27 @@ function gbsBuildVariationArray($variations){
     $talle = $metadata['attribute_pa_talle'][0];
     $color = $metadata['attribute_pa_color'][0];
     $order = $metadata['attribute_pa_order'][0];
-    $talles[] = ['talle' => $talle, 'order' => $order];
-    $arrVariations[$color][] = ['talle' => $talle, 'variation_id' => $variation->ID, 'order' => $order];
+    $talles[$talle] = ['talle' => $talle, 'order' => $order];
+    $arrVariations[$color][] = ['talle' => $talle, 'id' => $variation->ID, 'order' => $order];
   }
-  ksort($orders);
-  $varMeta['talles'] = $talles;
+
+  foreach ($arrVariations as $key => $value) {
+    $arrVariations[$key] = sortByOrderAttr($value);
+  }
+
+  $varMeta['talles'] = sortByOrderAttr($talles);
   $varMeta['variations'] = $arrVariations;
-  echo json_encode($varMeta);
   return $varMeta;
 }
 
-function gbsOrderVariationArrByTalle($arrVariations){
-  $tmp = [];
-  foreach ($arrVariations as $key => $vari) {
-    ksort($vari);
-    $tmp[$key] = $vari;
-  }
-  return $tmp;
-}
+function sortByOrderAttr($collection){
+  usort($collection, function($a, $b){
+      if ($a['order'] == $b['order'])
+        return 0;
 
-add_action('wp_ajax_get_do_checkout', 'get_do_checkout');
-add_action('wp_ajax_nopriv_get_do_checkout', 'get_do_checkout');
-
-function get_do_checkout(){
-     $sucursales = get_user_meta(($_POST['user']),'id_sucursal', false);
-				if (sizeof($sucursales)>= 1) { ?>
-				<div id="sucursalSelection cuatrocol">
-		            <div>Seleccione la sucursal:</div>
-		            <div id="sucursalesList">
-		              <select name="sucursal" required>
-		                  <option value="" disabled selected>Seleccione una sucursal</option>
-    								  <?php	foreach ($sucursales as $key => $sucursal) { ?>
-											<option value="<?php echo $sucursal?>"><?php echo $sucursal?></option>
-										  <?php }?>
-		              </select>
-		            </div>
-		            </div>
-				<?php } else{ ?>
-					<input type="hidden" name="sucursal" value="gbs_noSucursal">
-				<?php }
-				wp_die();
-
+      return ($a['order'] < $b['order']) ? -1 : 1;
+  });
+  return $collection;
 }
 
 function gbsBuildCartItemsArray($cartItems){
