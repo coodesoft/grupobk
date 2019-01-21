@@ -153,7 +153,7 @@ function assignSeller(){
   ?>
   <table>
       <tr>
-        <th>Cliente ID</th>
+        <th>Seller ID</th>
         <th>Nombre</th>
         <th>Apellido</th>
       </tr>
@@ -162,8 +162,9 @@ function assignSeller(){
       <td><?php echo $seller->seller_ID; ?></td>
       <td><?php echo $seller->Nombre; ?></td>
       <td><?php echo $seller->Apellido; ?></td>
+      </tr>
     <?php } ?>
-    </tr>
+
   </table>
   <?php
 }

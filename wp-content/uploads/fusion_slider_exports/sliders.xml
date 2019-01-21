@@ -27,13 +27,13 @@
 
 <channel>
 	<title>Science</title>
-	<link>http://globalsax.com/demo</link>
+	<link>http://grupobk.com.ar/demo</link>
 	<description></description>
 	<pubDate>Fri, 07 Jul 2017 05:21:37 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>http://avada.theme-fusion.com/</wp:base_site_url>
-	<wp:base_blog_url>http://globalsax.com/demo</wp:base_blog_url>
+	<wp:base_blog_url>http://grupobk.com.ar/demo</wp:base_blog_url>
 
 	<wp:author><wp:author_id>1250</wp:author_id><wp:author_login><![CDATA[sam-mi]]></wp:author_login><wp:author_email><![CDATA[admin@example.com]]></wp:author_email><wp:author_display_name><![CDATA[sam-mi]]></wp:author_display_name><wp:author_first_name><![CDATA[]]></wp:author_first_name><wp:author_last_name><![CDATA[]]></wp:author_last_name></wp:author>
 
@@ -42,10 +42,10 @@
 
 	<item>
 		<title>Home</title>
-		<link>http://globalsax.com/demo/slide/home/</link>
+		<link>http://grupobk.com.ar/demo/slide/home/</link>
 		<pubDate>Tue, 01 Nov 2016 16:07:14 +0000</pubDate>
 		<dc:creator><![CDATA[sam-mi]]></dc:creator>
-		<guid isPermaLink="false">http://globalsax.com/demo/?post_type=slide&#038;p=27</guid>
+		<guid isPermaLink="false">http://grupobk.com.ar/demo/?post_type=slide&#038;p=27</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -192,11 +192,11 @@
 		</wp:postmeta>
 		<wp:postmeta>
 			<wp:meta_key><![CDATA[pyre_button_1]]></wp:meta_key>
-			<wp:meta_value><![CDATA[[fusion_button link="http://globalsax.com/demo/about/" color="default" size="xlarge" type="" shape="" target="_self" title="" gradient_colors="|" gradient_hover_colors="|" accent_color="" accent_hover_color="" bevel_color="" border_width="" shadow="" icon="" icon_divider="yes" icon_position="left" modal="" animation_type="0" animation_direction="down" animation_speed="0.1" class="" id=""]Our approach[/fusion_button]]]></wp:meta_value>
+			<wp:meta_value><![CDATA[[fusion_button link="http://grupobk.com.ar/demo/about/" color="default" size="xlarge" type="" shape="" target="_self" title="" gradient_colors="|" gradient_hover_colors="|" accent_color="" accent_hover_color="" bevel_color="" border_width="" shadow="" icon="" icon_divider="yes" icon_position="left" modal="" animation_type="0" animation_direction="down" animation_speed="0.1" class="" id=""]Our approach[/fusion_button]]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
 			<wp:meta_key><![CDATA[pyre_button_2]]></wp:meta_key>
-			<wp:meta_value><![CDATA[[fusion_button link="http://globalsax.com/demo/services/" color="default" size="xlarge" type="" shape="" target="_self" title="" gradient_colors="|" gradient_hover_colors="|" accent_color="" accent_hover_color="" bevel_color="" border_width="" shadow="" icon="" icon_divider="yes" icon_position="left" modal="" animation_type="0" animation_direction="down" animation_speed="0.1" class="" id=""]Our solutions[/fusion_button]]]></wp:meta_value>
+			<wp:meta_value><![CDATA[[fusion_button link="http://grupobk.com.ar/demo/services/" color="default" size="xlarge" type="" shape="" target="_self" title="" gradient_colors="|" gradient_hover_colors="|" accent_color="" accent_hover_color="" bevel_color="" border_width="" shadow="" icon="" icon_divider="yes" icon_position="left" modal="" animation_type="0" animation_direction="down" animation_speed="0.1" class="" id=""]Our solutions[/fusion_button]]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
 </channel>

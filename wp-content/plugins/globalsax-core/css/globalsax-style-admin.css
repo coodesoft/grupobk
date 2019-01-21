@@ -36,3 +36,17 @@ body.plugin-base-admin_page_wissc-remote-subpage h3 {
 .gs-text-center{text-align:center}
 #clientsList {margin-top:10px}
 #clientsList select {margin-left:20%}
+
+#editSeller table{
+    border-collapse:collapse;width:300px;margin:auto
+}
+#editSeller table tr:nth-child(even){background-color:#f2f2f2}
+#editSeller table tr:hover{background-color:#ddd}
+#editSeller table th, #editSeller table td {border:1px solid #ddd;padding:8px}
+#editSeller table th {padding-top:12px;padding-bottom:12px;text-align:center;background-color:#802754;color:white}
+#editSeller table td{text-align:center}
+#editSeller table{margin-top:15px;width:100%}
+.gs-submit-button{margin-top:10px}
+.gs-text-center{text-align:center}
+#clientsList {margin-top:10px}
+#clientsList select {margin-left:20%}
