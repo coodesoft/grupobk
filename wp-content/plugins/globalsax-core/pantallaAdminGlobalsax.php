@@ -11,6 +11,7 @@ function theme_settings_page()
           <h2 class="nav-tab-wrapper">
           <a href="<?= admin_url('admin.php?page='.$pluginPageUID.'&tab=sincronizar')?>" class="nav-tab">Sincronizar</a>
           <a href="<?= admin_url('admin.php?page='.$pluginPageUID.'&tab=assignClient')?>" class="nav-tab">Asignar clientes</a>
+          <a href="<?= admin_url('admin.php?page='.$pluginPageUID.'&tab=assignSeller')?>" class="nav-tab">Asignar Seller</a>
         </h2>
 
       <div class="panel-body">
@@ -26,6 +27,9 @@ function theme_settings_page()
 
         <?php if ($activeTab == 'assignClient'){ ?>
   				<div class="gs-tab" id="editClientRel"><?php	assignClient(); ?></div>
+  			<?php } ?>
+        <?php if ($activeTab == 'assignSeller'){ ?>
+  				<div class="gs-tab" id="editSeller"><?php assignSeller(); ?></div>
   			<?php } ?>
 		</div>
 	<?php
@@ -76,7 +80,7 @@ function display_opcion_sincronizar_clientes() {
     <script>
 
       function sincronizarClientes(){
-          
+
         jQuery.ajax({
           type : "post",
           url : "<?php echo home_url('/wp-admin/admin-ajax.php'); ?>",
@@ -91,10 +95,31 @@ function display_opcion_sincronizar_clientes() {
         });
       }
     </script>
-
-
 	<?php
 
+}
+function display_opcion_sincronizar_vendedores() {
+  ?>
+  <input type="button" name="sincronizar_vendedores" value="Sincronizar vendedores" onclick="sincronizarVendedores()"/>
+  <script>
+
+    function sincronizarVendedores(){
+
+      jQuery.ajax({
+        type : "post",
+        url : "<?php echo home_url('/wp-admin/admin-ajax.php'); ?>",
+        data : 'action=get_sincronizar_vendedor&security=<?php echo wp_create_nonce('globalsax'); ?>',
+        success: function( response ) {
+          console.log(responreturn se);
+          //location.reload();
+      },
+      error: function( data ) {
+        console.log(data);
+      }
+      });
+    }
+  </script>
+<?php
 }
 function display_theme_panel_fields()
 {
@@ -104,21 +129,50 @@ function display_theme_panel_fields()
 	register_setting("section", "productos");
 	add_settings_field("clientes", "1) Sincronizar lista de clientes", "display_opcion_sincronizar_clientes","theme-options", "section");
 	register_setting("section", "clientes");
-	//add_settings_field("opcion_3", "1) Opcion 3", "display_opcion_generar_cotizacion","theme-options", "section");
-	//register_setting("section", "opcion_3");
+	add_settings_field("vendedores", "2) Sincronizar lista de vendedores", "display_opcion_sincronizar_vendedores","theme-options", "section");
+	register_setting("section", "vendedores");
 	//add_settings_field("opcion_4", "1) Opcion 4", "display_opcion_generar_cotizacion","theme-options", "section");
     //register_setting("section", "opcion_4");
 	/**/
 }
 
 add_action("admin_init", "display_theme_panel_fields");
+function get_Sellers(){
 
+    global $wpdb;
+
+    $gs_seller_table = $wpdb->prefix . ('gs_sellers');
+
+    $query = 'SELECT * FROM ' . $gs_seller_table;
+
+    return $wpdb->get_results($query);
+}
+
+function assignSeller(){
+  $sellers = get_Sellers();
+  ?>
+  <table>
+      <tr>
+        <th>Cliente ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+      </tr>
+      <tr>
+        <?php foreach ($sellers as $key => $seller) { ?>
+      <td><?php echo $seller->seller_ID; ?></td>
+      <td><?php echo $seller->Nombre; ?></td>
+      <td><?php echo $seller->Apellido; ?></td>
+    <?php } ?>
+    </tr>
+  </table>
+  <?php
+}
 function get_clients_user_table(){
 
   global $wpdb;
 
   $gs_client_table = $wpdb->prefix . ('clients_users_rel');
-	
+
   $query = 'SELECT * FROM ' . $gs_client_table;
 
   return $wpdb->get_results($query);
@@ -135,11 +189,11 @@ function insert_GS_user($GS_client_id, $WP_user_id){
 
 }
 function get_GS_clients(){
-    
+
   global $wpdb;
-  
+
   $gs_client_table = $wpdb->prefix . ('gs_clients');
-  
+
   $query = "SELECT * FROM ". $gs_client_table;
 
   return $wpdb->get_results($query);
@@ -152,7 +206,7 @@ function get_GS_client($Client_ID){
   $gs_client_table = $wpdb->prefix . ('gs_clients');
 
   $query = "SELECT * FROM " . $gs_client_table . " WHERE Client_ID = ".$Client_ID;
-  
+
   return $wpdb->get_results($query, ARRAY_A);
 
 }
@@ -173,7 +227,6 @@ function assignClient(){
     if (!empty($_POST['borrar'])){
       delete_GS_rel($_POST['borrar']);
   }
-
 
 ?>
 
@@ -205,7 +258,7 @@ function assignClient(){
       <option value="" disabled selected>Seleccione un cliente</option>
       <?php
         $gs_clientes = get_GS_clients();
-        
+
       foreach ($gs_clientes as $key => $cliente) {
         ?>
                 <option value="<?php echo $cliente->Client_ID ?> "><?php echo $cliente->Name ?></option>
@@ -228,5 +281,6 @@ function assignClient(){
 
 <?php
 }
+
 
 ?>
