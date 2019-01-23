@@ -74,9 +74,9 @@ if ( 'modern' === Avada()->settings->get( 'mobile_menu_design' ) ) {
 	<?php
 	if (is_user_logged_in()) {
 		$current_user = wp_get_current_user();
-			$items = '<a href="'.wp_logout_url(home_url()).'"> <p style="margin-top: 1px">Bienvenido, '. $current_user->user_login .' </p></a><a href="'.home_url('/login').'"><img style="height:20px; width:25px;" src='. home_url("/img/salir.svg").'></a>';
+			$items = '<a style="margin-right: 5px;" href="'.wp_logout_url(home_url()).'"> <p style="margin-top: 1px">Bienvenido, '. $current_user->user_login .' </p></a><a style="margin-top:2px;" href="'.home_url('/login').'"><img style="height:20px; width:25px;" src='. home_url("/img/salir.svg").'></a>';
 	} else {
-			$items = '<a href="'.home_url('/login').'"> <p style="margin-top: 1px"> Login </p></a><a href="'.home_url('/login').'"><img style="height:20px; width:25px;" src='. home_url("/img/entrar.svg").'></a>';
+			$items = '<a style="margin-right: 5px;"  href="'.home_url('/login').'"> <p style="margin-top: 1px"> Iniciar Sesión </p></a><a style="margin-top:2px;" href="'.home_url('/login').'"><img style="height:20px; width:25px;" src='. home_url("/img/entrar.svg").'></a>';
 	}
 	echo $items;
 	?>
