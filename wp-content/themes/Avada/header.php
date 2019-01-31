@@ -70,21 +70,22 @@ if ( 'modern' === Avada()->settings->get( 'mobile_menu_design' ) ) {
 ?>
 
 <body <?php body_class(); ?>>
-	<div class="log_in fusion-header row" style="font-size:1.1em; display:flex">
-		<div class="col-md-11" style="margin:0 auto;max-width:1170px;">
-		<div class="col-md-2">
-		<?php $bkimg = home_url('/img/bk.svg');
-		echo '<img style="height:20px; width:40px; margin-top:5px;" src="'. $bkimg .'"></div>';
-		echo '';
-	if (is_user_logged_in()) {
-		$current_user = wp_get_current_user();
-			$items = '<div class="col-md-9" style="text-align:right;"><a style="" href="'.wp_logout_url(home_url()).'"><p style="margin-top: 5px">Bienvenido, '. $current_user->user_login .' </p></a></div><a style="margin-top:2px;" href="'.home_url('/login').'"><img style="height:20px; width:25px; margin-top:5px;" src='. home_url("/img/salir.svg").'></a>';
-	} else {
-			$items = '<div class="col-md-9" style="text-align:right;"><a style=""  href="'.home_url('/login').'"> <p style="margin-top: 5px"> Iniciar Sesión </p></a></div><a style="margin-top:2px;" href="'.home_url('/login').'"><img style="height:20px; width:25px; margin-top:5px;" src='. home_url("/img/entrar.svg").'></a>';
-	}
-	echo $items;
-	?>
-</div>
+	<div class="log_in fusion-header row" style="font-size:1.1em; display:flex; width:100%;">
+		<div class="header-bar" style="margin:0 auto;max-width:1170px;width:100%;display:inline-block;">
+			<div class="home-link" style="display:inline-block;padding-left:10px;">
+				<?php $bkimg = home_url('/img/bk.svg');
+				echo '<img style="height:20px; width:40px; margin-top:5px;" src="'. $bkimg .'">';
+				echo '<p onclick="location.href='.home_url().'">/ Grupo BK</p></div>';
+				echo '';
+				if (is_user_logged_in()) {
+				  $current_user = wp_get_current_user();
+				    $items = '<div class="header-log"><a style="" href="'.wp_logout_url(home_url()).'"><p style="margin-top: 5px">Bienvenido, '. $current_user->user_login .' </p></a><a href="'.home_url('/login').'"><img style="height:20px; width:25px; margin-top:5px;" src='. home_url("/img/salir.svg").'></a></div>';
+				} else {
+				    $items = '<div class="header-log"><a style=""  href="'.home_url('/login').'"> <p style="margin-top: 5px"> Iniciar Sesión </p></a><a href="'.home_url('/login').'"><img style="height:20px; width:25px; margin-top:5px;" src='. home_url("/img/entrar.svg").'></a></div>';
+				  }
+			echo $items;
+			?>
+		</div>
 </div>
 	<?php do_action( 'avada_before_body_content' );
 

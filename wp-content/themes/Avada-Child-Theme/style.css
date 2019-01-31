@@ -61,6 +61,15 @@ img.img-responsive.wp-image-1118 {
 
 .log_in.fusion-header {
     height: 30px;
+	padding:0;
+	margin:0;
+}
+
+.header-log {
+	float:right;
+	display:inline-flex;
+	height:30px;
+	padding-right:10px;
 }
 
 .folder.icon img {
@@ -105,10 +114,9 @@ img.img-responsive.wp-image-1118 {
 	line-height: 1.2 !important;
 }
 
-.grupobk-descripcion {
-    width: 60%;
+#grupobk-descripcion {
+    width: 80%!important;
     margin:0 auto!important;
-	max-width:900px;
 }
 
 #grupobk-button {
@@ -282,6 +290,10 @@ div#cont_productos {
     padding: 0 1%;
 }
 
+.trescol p span, .doscol p span {
+    color: #c73232;
+}
+
 .fusion-tabs.classic .nav-tabs > li.active .tab-link, .fusion-tabs.classic .nav-tabs > li.active .tab-link:focus, .fusion-tabs.classic .nav-tabs > li.active .tab-link:hover, .fusion-tabs.vertical-tabs.classic .nav-tabs > li.active .tab-link {
     border-top: none;
     border-bottom: 3px solid #802754;
@@ -386,7 +398,7 @@ div#cont_productos {
 
 #menu-grupobk-menu, #menu-logged-in, #menu-cliente {
   	width: auto;
-	max-width: 1100px;
+	max-width: 1170px;
 	margin: 0 auto;
 	display: flex;
 	justify-content: space-between;
@@ -398,7 +410,7 @@ div#cont_productos {
 }
 
 div#grupobk-separator {
-    max-width: 1100px;
+    max-width: 1170px;
     margin: 0 auto;
 }
 
@@ -686,6 +698,12 @@ input[type=date]::-webkit-outer-spin-button{
 	fusion-column-wrapper h3 {
     	margin-left: 10%!important;
 	}
+	
+	#sucursales {
+		margin: 0 auto!important;
+		width:80%;
+	}
+	
 }
 
 @media only screen and (min-width: 701px) and (max-width: 800px){
@@ -696,6 +714,7 @@ input[type=date]::-webkit-outer-spin-button{
     	width: 90%;
     	margin: 0 auto;
 	}
+
 	grupobk-descripcion {
 		width: 90% !important;
     	margin: 0 auto!important;
@@ -706,9 +725,7 @@ input[type=date]::-webkit-outer-spin-button{
 	img.img-responsive.wp-image-1110 {
 		margin: 0!important;
 	}
-	.fusion-column-wrapper {
-    	margin: 0 5rem;
-	}
+
 	.fusion-column.col-lg-2.col-md-2.col-sm-2 {
     	width: 16.66666667%!important;
     	float: left;
@@ -946,7 +963,7 @@ p.demo_store{
 /* estilo de locales.php */
 
 .locales-section #provincia{
-  display: inline-block;
+  display: inline-block!important;
 }
 
 .locales-section #provincia::after{
@@ -1014,6 +1031,21 @@ body.bk-progress{
 
 }
 
+@media only screen and (max-width: 500px){
+	.info_list, .filters {
+		float:none!important;
+		margin-top:5%;
+	}
+	
+	.locales-section #provincia{
+		text-align:center;
+	}
+	
+	.titular h2{
+		text-align:center;
+	}
+}
+
 input#user_pass{
 	text-indent: 10px;
     display: block;
@@ -1043,11 +1075,72 @@ body.page-template-default.page.page-id-1171.logged-in.woocommerce-cart.woocomme
     height: auto!important;
 }
 
-.fusion-layout-column.fusion_builder_column.fusion_builder_column_1_2.fusion-one-half.fusion-column-first, .fusion-layout-column.fusion_builder_column.fusion_builder_column_1_2.fusion-one-half.fusion-column-last {
-    width: calc(50% - ( ( 4% ) * 0.5 ) )!important;
-}
 
 .login h1 a{
 	background-size: 120px!important;
 	width: 120px!important;
 }
+
+.column-left {
+	margin-left: 6%;
+}
+@font-face {
+				font-family: 'myriad-set-pro-text';
+				font-style: normal;
+				src: url('//grupobk.com.ar/demo/wp-content/uploads/useanyfont/180114082415Myriad-Set-Pro-Text.eot');
+				src: local('myriad-set-pro-text'), url('//globalsax.com/demo/wp-content/uploads/useanyfont/180114082415Myriad-Set-Pro-Text.eot') format('embedded-opentype'), url('//grupobk.com.ar/demo/wp-content/uploads/useanyfont/180114082415Myriad-Set-Pro-Text.woff') format('woff');
+			}
+            
+            .myriad-set-pro-text{font-family: 'myriad-set-pro-text' !important;}
+            
+					@font-face {
+				font-family: 'myriad-set-pro-thin';
+				font-style: normal;
+				src: url('//grupobk.com.ar/demo/wp-content/uploads/useanyfont/180215033405Myriad-Set-Pro-Thin.eot');
+				src: local('myriad-set-pro-thin'), url('//globalsax.com/demo/wp-content/uploads/useanyfont/180215033405Myriad-Set-Pro-Thin.eot') format('embedded-opentype'), url('//grupobk.com.ar/demo/wp-content/uploads/useanyfont/180215033405Myriad-Set-Pro-Thin.woff') format('woff');
+			}
+            
+            .myriad-set-pro-thin{font-family: 'myriad-set-pro-thin' !important;}
+            
+					@font-face {
+				font-family: 'myriad-ultralight';
+				font-style: normal;
+				src: url('//grupobk.com.ar/demo/wp-content/uploads/useanyfont/180430125258myriad-ultralight.eot');
+				src: local('myriad-ultralight'), url('//globalsax.com/demo/wp-content/uploads/useanyfont/180430125258myriad-ultralight.eot') format('embedded-opentype'), url('//grupobk.com.ar/demo/wp-content/uploads/useanyfont/180430125258myriad-ultralight.woff') format('woff');
+			}
+            
+            .myriad-ultralight{font-family: 'myriad-ultralight' !important;}
+            
+					@font-face {
+				font-family: 'myriad-medium';
+				font-style: normal;
+				src: url('//grupobk.com.ar/demo/wp-content/uploads/useanyfont/180430125320myriad-medium.eot');
+				src: local('myriad-medium'), url('//grupobk.com.ar/demo/wp-content/uploads/useanyfont/180430125320myriad-medium.eot') format('embedded-opentype'), url('//grupobk.com.ar/demo/wp-content/uploads/useanyfont/180430125320myriad-medium.woff') format('woff');
+			}
+            
+            .myriad-medium{font-family: 'myriad-medium' !important;}
+            
+					@font-face {
+				font-family: 'myriad-bold';
+				font-style: normal;
+				src: url('//grupobk.com.ar/demo/wp-content/uploads/useanyfont/180430125336myriad-bold.eot');
+				src: local('myriad-bold'), url('//grupobk.com.ar/demo/wp-content/uploads/useanyfont/180430125336myriad-bold.eot') format('embedded-opentype'), url('//grupobk.com.ar/demo/wp-content/uploads/useanyfont/180430125336myriad-bold.woff') format('woff');
+			}
+            
+            .myriad-bold{font-family: 'myriad-bold' !important;}
+            
+					@font-face {
+				font-family: 'myriad-semibold';
+				font-style: normal;
+				src: url('//grupobk.com.ar/demo/wp-content/uploads/useanyfont/180430125353myriad-semibold.eot');
+				src: local('myriad-semibold'), url('//grupobk.com.ar/demo/wp-content/uploads/useanyfont/180430125353myriad-semibold.eot') format('embedded-opentype'), url('//grupobk.com.ar/demo/wp-content/uploads/useanyfont/180430125353myriad-semibold.woff') format('woff');
+			}
+            
+            .myriad-semibold{font-family: 'myriad-semibold' !important;}
+            
+						body, h1, h2, h3, h4, h5, h6, p, blockquote, li, a{
+					font-family: 'myriad-set-pro-text' !important;
+				}
+						li a span{
+					font-family: 'myriad-set-pro-thin' !important;
+				}
