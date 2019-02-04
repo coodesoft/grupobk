@@ -13,6 +13,10 @@ main#main {
     padding: 0px!important;
 }
 
+body.home {
+	height:auto!important;
+}
+
 .fusion-logo {
     margin: 20px 0 35px!important;
 }
@@ -63,6 +67,17 @@ img.img-responsive.wp-image-1118 {
     height: 30px;
 	padding:0;
 	margin:0;
+}
+
+.home-link p {
+    color: #76254E;
+    font-size: 1em;
+    height: 20px;
+    line-height: 23px;
+    margin-left: 5px;
+    float: right;
+    margin-top: 5px;
+    cursor: pointer;
 }
 
 .header-log {
@@ -117,6 +132,13 @@ img.img-responsive.wp-image-1118 {
 #grupobk-descripcion {
     width: 80%!important;
     margin:0 auto!important;
+	max-width:1170px;
+	margin-bottom:1em!important;
+}
+
+.grupobk{
+	width:80%;
+	margin:0 auto;
 }
 
 #grupobk-button {
@@ -255,8 +277,9 @@ div.wpcf7 {
 }
 
 div#cont_productos {
-	max-width: 1100px;
+	max-width: 1170px;
 	margin: 0 auto!important;
+	width:64%;
 }
 
 .adjuntar{
@@ -644,6 +667,10 @@ input[type=date]::-webkit-outer-spin-button{
 	.imageframe-align-center img {
     	border-radius: 0px !important;
 	}
+	
+	.fusion-imageframe {
+		width:100%;
+	}
 
 	.fusion-button {
 		border: none !important;
@@ -714,6 +741,10 @@ input[type=date]::-webkit-outer-spin-button{
     	width: 90%;
     	margin: 0 auto;
 	}
+	
+	#grupobk-colum1-1-mobile {
+    	width: 50% !important;
+	}
 
 	grupobk-descripcion {
 		width: 90% !important;
@@ -724,6 +755,20 @@ input[type=date]::-webkit-outer-spin-button{
 	img.img-responsive.wp-image-1100,
 	img.img-responsive.wp-image-1110 {
 		margin: 0!important;
+	}
+	
+	.grupobk-img-home img {
+		width: 100%;
+	}
+	
+	.grupobk-text .fusion-column-wrapper{
+		width: 80%;
+		margin-left: 10%;
+		min-height:100%!important;
+	}
+	
+	.imageframe-align-center img {
+		border-radius:0!important;
 	}
 
 	.fusion-column.col-lg-2.col-md-2.col-sm-2 {
