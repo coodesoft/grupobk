@@ -75,7 +75,7 @@ if ( 'modern' === Avada()->settings->get( 'mobile_menu_design' ) ) {
 			<div class="home-link" style="display:inline-block;padding-left:10px;">
 				<?php $bkimg = home_url('/img/bk.svg');
 				echo '<img style="height:20px; width:40px; margin-top:5px;" src="'. $bkimg .'">';
-				echo '<p onclick="location.href='.home_url().'">/ Grupo BK</p></div>';
+				echo '<p class="bk-hidden" onclick="location.href='.home_url().'">/ Grupo BK</p></div>';
 				echo '';
 				if (is_user_logged_in()) {
 				  $current_user = wp_get_current_user();
