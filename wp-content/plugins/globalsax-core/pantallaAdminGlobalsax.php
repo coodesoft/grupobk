@@ -12,6 +12,7 @@ function theme_settings_page()
           <a href="<?= admin_url('admin.php?page='.$pluginPageUID.'&tab=sincronizar')?>" class="nav-tab">Sincronizar</a>
           <a href="<?= admin_url('admin.php?page='.$pluginPageUID.'&tab=assignClient')?>" class="nav-tab">Asignar clientes</a>
           <a href="<?= admin_url('admin.php?page='.$pluginPageUID.'&tab=assignSeller')?>" class="nav-tab">Asignar Seller</a>
+          <a href="<?= admin_url('admin.php?page='.$pluginPageUID.'&tab=adminUrl')?>" class="nav-tab">Administrar URL</a>
         </h2>
 
       <div class="panel-body">
@@ -30,6 +31,9 @@ function theme_settings_page()
   			<?php } ?>
         <?php if ($activeTab == 'assignSeller'){ ?>
   				<div class="gs-tab" id="editSeller"><?php assignSeller(); ?></div>
+  			<?php } ?>
+        <?php if ($activeTab == 'adminUrl'){ ?>
+  				<div class="gs-tab" id="adminUrl"><?php adminUrl(); ?></div>
   			<?php } ?>
 		</div>
 	<?php
@@ -110,7 +114,7 @@ function display_opcion_sincronizar_vendedores() {
         url : "<?php echo home_url('/wp-admin/admin-ajax.php'); ?>",
         data : 'action=get_sincronizar_vendedor&security=<?php echo wp_create_nonce('globalsax'); ?>',
         success: function( response ) {
-          console.log(responreturn se);
+          console.log(response);
           //location.reload();
       },
       error: function( data ) {
@@ -120,6 +124,11 @@ function display_opcion_sincronizar_vendedores() {
     }
   </script>
 <?php
+}
+
+function display_opcion_administrar_url() {
+  $commonurl = get_user_meta(1, "url", true);
+  echo "La URL actual es: " . $commonurl;
 }
 function display_theme_panel_fields()
 {
@@ -131,8 +140,8 @@ function display_theme_panel_fields()
 	register_setting("section", "clientes");
 	add_settings_field("vendedores", "2) Sincronizar lista de vendedores", "display_opcion_sincronizar_vendedores","theme-options", "section");
 	register_setting("section", "vendedores");
-	//add_settings_field("opcion_4", "1) Opcion 4", "display_opcion_generar_cotizacion","theme-options", "section");
-    //register_setting("section", "opcion_4");
+	add_settings_field("url", "4) Administrar url del WS", "display_opcion_administrar_url","theme-options", "section");
+    register_setting("section", "url");
 	/**/
 }
 
@@ -283,5 +292,19 @@ function assignClient(){
 <?php
 }
 
-
+function adminUrl(){
+  if (!empty($_POST['url'])){
+    $commonurl = $_POST['url'];
+    update_user_meta(1, 'url', $commonurl);
+  }
+  $commonurl = get_user_meta(1,'url', true);
+  ?>
+  <form class="" method="post">
+    <input type="Text" name="url" value="<?php echo $commonurl; ?>">
+    <div class="gs-submit-button">
+      <button type="submit" name="AceptarUrl" value="AceptarUrl">Aceptar</button>
+    </div>
+  </form>
+  <?php
+}
 ?>

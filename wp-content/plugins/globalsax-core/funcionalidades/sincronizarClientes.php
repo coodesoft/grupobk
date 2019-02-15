@@ -19,11 +19,13 @@ function ajax_get_sincronizar_cliente(){
 
 
 function get_sincronizar_cliente(){
-    
+
 	$cantidadImportar = get_user_meta(1,"importar_clients",true);
 	if($cantidadImportar == -99 || $cantidadImportar > 0){
 		/**Obtener el archivo JSON**/
-		$url = 'http://askipusax.dyndns.biz:65300/api/Client';
+		$commonurl = get_user_meta(1, 'url', true);
+		$url = $commonurl . '/api/Client';
+
 		$ch = curl_init();
 
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -140,7 +142,7 @@ function insert_client($client_data)
        dbDelta( $sql );
     }
     $wpdb->insert($gs_clients_table, $values, $types);
-    
+
     if (sizeof($client_data['Sucs']) > 0) {
 		insert_client_suc($client_data['Client_ID'], $client_data['Sucs']);
     }

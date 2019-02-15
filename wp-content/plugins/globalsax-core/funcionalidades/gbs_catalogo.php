@@ -195,7 +195,8 @@ function gbs_create_order(){
 	$order->calculate_totals();
 	$status = $order->update_status('completed');
   $ws_json = gbs_biuld_ws_object($user->ID, $values, $order);
-  $endpoint = "http://askipusax.dyndns.biz:65300/api/Order";
+  $commonurl = get_user_meta(1, "url", true);
+  $endpoint = $commonurl . "/api/Order";
   $send_data = array(
     'headers'     => array('Content-Type' => 'application/json; charset=utf-8'),
     'body'        => json_encode($ws_json)

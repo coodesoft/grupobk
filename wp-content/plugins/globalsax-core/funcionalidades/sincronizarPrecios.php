@@ -10,8 +10,9 @@ function ajax_get_sincronizar_precios(){
 function get_sincronizar_precios(){
 	$dirJsonPrecio = plugin_dir_path( __DIR__ ).'funcionalidades/listaPrecios.json';
 	/**Obtener el archivo JSON**/
-	$url = $GLOBALS['cgv']['endpoint_lista_precios'];
-	$url = 'http://askipusax.dyndns.biz:65300/api/PriceList';
+	//$url = $GLOBALS['cgv']['endpoint_lista_precios'];
+	$commonurl = get_user_meta(1, 'url', true);
+	$url = $commonurl.'/api/PriceList';
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

@@ -23,7 +23,9 @@ function get_sincronizar_vendedor(){
 	$cantidadImportar = get_user_meta(1,"importar_sellers",true);
 	if($cantidadImportar == -99 || $cantidadImportar > 0){
 		/**Obtener el archivo JSON**/
-		$url = 'http://askipusax.dyndns.biz:65300/api/Seller';
+		global $wpdb;
+		$commonurl = get_user_meta(1, 'url', true);
+		$url = $commonurl .'/api/Seller';
 		$ch = curl_init();
 
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);

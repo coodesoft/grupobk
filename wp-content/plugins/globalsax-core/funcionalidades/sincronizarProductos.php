@@ -22,8 +22,8 @@ function get_sincronizar_producto(){
 
 
 		/**Obtener el archivo JSON**/
-
-		$url = 'http://askipusax.dyndns.biz:65300/api/Product';
+		$commonurl = get_user_meta(1, 'url', true);
+		$url = $commonurl . '/api/Product';
 
 		$ch = curl_init();
 
