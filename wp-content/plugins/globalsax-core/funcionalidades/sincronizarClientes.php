@@ -165,9 +165,7 @@ function insert_client($client_data)
 }
 
 function insert_client_suc($client_id, $sucursales){
-    echo "entra en las sucursales : ";
   foreach ($sucursales as $key => $suc) {
-      echo $suc['SucName'] . "-";
     add_user_meta($client_id, 'id_sucursal', $suc['SucName']);
   }
 }

@@ -34,6 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	        $items = '<div class="submenu"><ul style="width:auto;max-width:1100px;margin:10px auto;display:flex;">';
 	        $items .= '<li class="submenu-item"><a target="_self" rel="noopener noreferrer" href="'. home_url('/rrhh/') .' "><span class="menu-text">RRHH</span></a></li>';
 	        $items .= "</ul></div>";
+					$items .= "<style>@media only screen and (max-width: 800px) style.css?ver=4.9.9:1170 .post-content {  margin-top: 120px!important; }</style>";
 	    } else if ( in_array( 'customer', (array) $user->roles ) ){
 	    $items = '<div class="submenu"><ul style="width:auto;max-width:1100px;margin:10px auto;display:flex;">';
 	    $items .= '<li class="submenu-item"><a target="_self" rel="noopener noreferrer" href="'. home_url('/noticias/') .' "><span class="menu-text">Noticias</span></a></li>';
@@ -41,7 +42,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	    $items .= '<li class="submenu-item"><a target="_self" rel="noopener noreferrer" href="'. home_url('/catalogo') .' "><span class="menu-text">Pedidos</span></a></li>';
 	    $items .= '<li class="submenu-item"><a target="_self" rel="noopener noreferrer" href="'. home_url('/mi-cuenta/') .' "><span class="menu-text">Mi Cuenta</span></a></li>';
 	    $items .= "</ul></div>";
+			$items .= "<style>@media only screen and (max-width: 800px) {.post-content {  margin-top: 120px!important; }}</style>";
 	    }
+
 	 echo $items;
 	}
 
