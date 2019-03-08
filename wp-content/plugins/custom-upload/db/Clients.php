@@ -108,8 +108,7 @@ class Clients{
     $placeholders = array_fill(0, count($ids), '%d');
     $format = implode(', ', $placeholders);
 
-    $queryStr = 'SELECT id, lat, '.self::RELATED.'.long FROM '. self::RELATED .' WHERE id IN ('.$format.')';
-
+    $queryStr = 'SELECT id, ' .self::RELATED. '.lat, '.self::RELATED.'.long FROM '. self::RELATED .' WHERE id IN ('.$format.')';
     return $wpdb->get_results($wpdb->prepare($queryStr, $ids), ARRAY_A);
   }
 
