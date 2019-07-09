@@ -191,6 +191,7 @@ function cu_get_all_sucursales(){
 }
 
 add_action( 'wp_ajax_cu_get_geocode_sucursales', 'cu_get_geocode_sucursales' );
+add_action( 'wp_ajax_nopriv_cu_get_geocode_sucursales', 'cu_get_geocode_sucursales' );
 function cu_get_geocode_sucursales(){
   $ids = $_POST['geodata'];
   if (count($ids)){
