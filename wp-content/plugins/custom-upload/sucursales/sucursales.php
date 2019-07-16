@@ -87,7 +87,7 @@ function cu_add_client(){
   parse_str($_POST['data'], $params);
 
   $clientName = $params['Cliente'];
-  $clientName = strtolower($clientName);
+  $clientName = $clientName;
 
   $stored = Clients::getByName($clientName);
 
@@ -123,7 +123,7 @@ function cu_edit_client(){
   parse_str($_POST['data'], $params);
 
   $clientEdit = $params['ClientEdit'];
-  $clientName = strtolower($clientEdit['name']);
+  $clientName = $clientEdit['name'];
   $clientId = $clientEdit['id'];
 
   $result = Clients::update($clientId, $clientName);
