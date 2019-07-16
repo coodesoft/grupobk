@@ -6,6 +6,11 @@ class Clients{
 
     const RELATED = 'wd_cu_sucursales';
 
+    
+  static function getSpecialKeys(){
+      return ['direccion_publica', 'sitio_web', 'telefono'];
+  }    
+    
   static function add($name){
     global $wpdb;
 
@@ -54,9 +59,9 @@ class Clients{
     $fields = [];
     $types = [];
 
-
+    $specialKeys = self::getSpecialKeys();
     foreach ($params as $key => $value) {
-      $types[] = ($key == 'direccion_publica') ? '%s' : '%d';
+      $types[] = ( in_array($key, $specialKeys) ) ? '%s' : '%d';
     }
 
     return $wpdb->update(self::RELATED, $params, ['id' => $sucursal_id, 'cliente_id' => $cliente_id], $types, ['%d', '%d']);
@@ -108,7 +113,7 @@ class Clients{
     $placeholders = array_fill(0, count($ids), '%d');
     $format = implode(', ', $placeholders);
 
-    $queryStr = 'SELECT id, ' .self::RELATED. '.lat, '.self::RELATED.'.long FROM '. self::RELATED .' WHERE id IN ('.$format.')';
+    $queryStr = 'SELECT id, ' .self::RELATED. '.lat, '.self::RELATED.'.long, '.self::RELATED.'.telefono FROM '. self::RELATED .' WHERE id IN ('.$format.')';
     return $wpdb->get_results($wpdb->prepare($queryStr, $ids), ARRAY_A);
   }
 

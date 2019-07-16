@@ -33,7 +33,8 @@
 					latlng = {lat: parseFloat(data[i]['lat']), lng: parseFloat(data[i]['long'])};
 					map.setCenter(latlng);
 
-					aditionalInfo = featHtmlArr[data[i]['id']][1] + "<br />" + featHtmlArr[data[i]['id']][0] + "<br />" + featHtmlArr[data[i]['id']][2];
+					aditionalInfo = featHtmlArr[data[i]['id']][1] + "<br />" + featHtmlArr[data[i]['id']][0] + "<br />" + featHtmlArr[data[i]['id']][2] + "<br />";
+                    aditionalInfo += 'Tel: '+data[i]['telefono'];
 					createMarker(latlng, aditionalInfo);
 				}
 			}

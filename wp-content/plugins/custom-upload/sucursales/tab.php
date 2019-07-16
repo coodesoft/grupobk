@@ -164,8 +164,8 @@ function uploadSucursal(){?>
     							<option value="Mendoza" >Mendoza</option>
     							<option value="Misiones" >Misiones</option>
     							<option value="Neuquen" >Neuquen</option>
-                  <option value="Rio Negro" >Rio Negro</option>
-                  <option value="Salta" >Salta</option>
+                                <option value="Rio Negro" >Rio Negro</option>
+                                <option value="Salta" >Salta</option>
     							<option value="San Juan" >San Juan</option>
     							<option value="San Luis" >San Luis</option>
     							<option value="Santa Cruz" >Santa Cruz</option>
@@ -208,11 +208,12 @@ function editFeatures(){?>
         <tr>
           <th>Cliente</th>
           <th>Dirección</th>
+          <th>Sitio Web</th>
+          <th>Telefono</th>
           <th>Visibilidad</th>
           <th>Venta Mayorista</th>
           <th>Venta Minorista</th>
           <th>Venta online</th>
-          <th>Sitio Web</th>
           <th>Revendedoras</th>
         </tr>
         <?php $sucursales = Clients::getSucursales(); ?>
@@ -220,11 +221,12 @@ function editFeatures(){?>
         <tr>
           <td><?php echo $sucursal['nombre_cliente'] ?></td>
           <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][direccion_publica]" "type="text" value="<?php echo $sucursal['direccion_publica'] ?>"></td>
+          <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][sitio_web]" type="text" value="<?php echo $sucursal['sitio_web'] ?>" ></td>
+          <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][telefono]" type="text" value="<?php echo $sucursal['telefono'] ?>" ></td>
           <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][visibilidad]" type="checkbox" <?php echo $sucursal['visibilidad'] ? 'checked' : '' ?> ></td>
           <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][venta_mayorista]" type="checkbox" <?php echo $sucursal['venta_mayorista'] ? 'checked' : '' ?> ></td>
           <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][venta_minorista]" type="checkbox" <?php echo $sucursal['venta_minorista'] ? 'checked' : '' ?> ></td>
           <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][venta_online]" type="checkbox" <?php echo $sucursal['venta_online'] ? 'checked' : '' ?> ></td>
-          <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][sitio_web]" type="checkbox" <?php echo $sucursal['sitio_web'] ? 'checked' : '' ?> ></td>
           <td><input name="Cliente[<?php echo $sucursal['cliente_id'] ?>][<?php echo $sucursal['id'] ?>][revendedoras]" type="checkbox" <?php echo $sucursal['revendedoras'] ? 'checked' : '' ?> ></td>
         </tr>
         <?php } ?>

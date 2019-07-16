@@ -6,6 +6,20 @@ require_once(__DIR__ . '/../db/Clients.php');
    sin tener que modificar TODAS las rutas, una por una. */
 $imgBasePath = home_url('/img/');
 
+function getUrlWithProtocol($text){
+    $http = strpos($text, 'http');
+    $https = strpos($text, 'https');
+
+    if ($https !== false || $http !== false)
+        return $text;
+    
+    return 'http://' . $text;
+       
+    
+    
+    
+}
+
 function buildLocalesListHTML($sucursales){
   global $imgBasePath;
 
@@ -24,10 +38,21 @@ function buildLocalesListHTML($sucursales){
              <span><?php echo $v['nombre_cliente'] ?></span>
           </div>
           <div class="direccion_publica"> <?php echo $v['direccion_publica'] ?> </div>
+          <?php if ( strlen($v['telefono']) ) { ?>
+              <div class="telefono">
+                  <img class="items" data-toggle="tooltip" data-placement="top" title="Sitio Web" src="<?php echo $imgBasePath.'phone.svg'?>">
+                  <?php echo $v['telefono'] ?> 
+              </div>
+          <?php } ?>
+              
           <div class="info">
             <ul>
-              <?php if (($v['sitio_web'])== true) { ?>
-                <li><img class="items" data-toggle="tooltip" data-placement="top" title="Sitio Web" src="<?php echo $imgBasePath.'locales_sitio_web.svg'?>"></li>
+              <?php if ( strlen($v['sitio_web']) ) { ?>
+                <li>
+                    <a href="<?php echo getUrlWithProtocol($v['sitio_web']) ?>" target="_blank">
+                        <img class="items" data-toggle="tooltip" data-placement="top" title="Sitio Web" src="<?php echo $imgBasePath.'locales_sitio_web.svg'?>">
+                    </a>
+                </li>
               <?php } ?>
 
               <?php if (($v['venta_mayorista'])== true) { ?>
@@ -230,6 +255,8 @@ function cu_edit_features(){
   $clientes = $params['Cliente'];
   $result = [];
   $results = [];
+  $specialKeys = Clients::getSpecialKeys();
+    
   foreach ($clientes as $cliente_id => $sucursales) {
     foreach ($sucursales as $sucursal_id => $features) {
       $fields = [];
@@ -238,8 +265,9 @@ function cu_edit_features(){
       $fields['venta_minorista'] = 0;
       $fields['venta_online'] = 0;
       $fields['revendedoras'] = 0;
+      
       foreach ($features as $key => $value) {
-        if ($key == 'direccion_publica')
+        if ( in_array($key, $specialKeys) )
           $fields[$key] = $value;
         else
           $fields[$key] = 1;
