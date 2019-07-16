@@ -13,8 +13,6 @@ global $imgBasePath;
     <select name="menu-prov"  class="selector" aria-required="true" aria-invalid="false">
         <option value="">---</option>
         <option value="Buenos Aires">Buenos Aires</option>
-        <option value="Buenos Aires-GBA">Buenos Aires-GBA</option>
-        <option value="Capital Federal">Capital Federal</option>
         <option value="Catamarca">Catamarca</option>
         <option value="Chaco">Chaco</option>
         <option value="Chubut">Chubut</option>
