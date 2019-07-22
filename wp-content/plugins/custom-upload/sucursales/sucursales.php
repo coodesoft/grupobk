@@ -33,7 +33,7 @@ function buildLocalesListHTML($sucursales){
           <div class="direccion_publica"> <?php echo $v['direccion_publica'] ?> </div>
           <?php if ( strlen($v['telefono']) ) { ?>
               <div class="telefono">
-                  <img class="items imgtel" data-toggle="tooltip" data-placement="top" title="Sitio Web" src="<?php echo $imgBasePath.'phone.svg'?>">
+                  <img class="items imgtel" data-toggle="tooltip" data-placement="top" title="Teléfono" src="<?php echo $imgBasePath.'phone.svg'?>">
                   <p class="numtel">
                     <?php echo $v['telefono'] ?> 
                   </p>
