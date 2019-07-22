@@ -1,15 +1,11 @@
 <?php
-
 require_once(__DIR__ . '/../db/Clients.php');
-
 /* Con esta variable se puede sustituir facilmente la ruta base de las imágenes
    sin tener que modificar TODAS las rutas, una por una. */
 $imgBasePath = home_url('/img/');
-
 function getUrlWithProtocol($text){
     $http = strpos($text, 'http');
     $https = strpos($text, 'https');
-
     if ($https !== false || $http !== false)
         return $text;
     
@@ -19,16 +15,13 @@ function getUrlWithProtocol($text){
     
     
 }
-
 function buildLocalesListHTML($sucursales){
   global $imgBasePath;
-
   $groupedSucursales = [];
   foreach ($sucursales as $key => $sucursal) {
     $ciudad = $sucursal['ciudad'];
     $groupedSucursales[$ciudad][] = $sucursal;
   }
-
   foreach ($groupedSucursales as $ciudad => $sucursales) { ?>
     <div class="container-prov">
       <div class="ciudad bk-pointer"> <?php echo $ciudad ?> </div>
@@ -41,7 +34,9 @@ function buildLocalesListHTML($sucursales){
           <?php if ( strlen($v['telefono']) ) { ?>
               <div class="telefono">
                   <img class="items" data-toggle="tooltip" data-placement="top" title="Sitio Web" src="<?php echo $imgBasePath.'phone.svg'?>">
-                  <?php echo $v['telefono'] ?> 
+                  <p class="numtel">
+                    <?php echo $v['telefono'] ?> 
+                  </p>
               </div>
           <?php } ?>
               
@@ -77,31 +72,21 @@ function buildLocalesListHTML($sucursales){
     </div>
   <?php }
 }
-
-
-
 add_action( 'wp_ajax_cu_add_client', 'cu_add_client' );
 function cu_add_client(){
-
   $params = array();
   parse_str($_POST['data'], $params);
-
   $clientName = $params['Cliente'];
   $clientName = $clientName;
-
   $stored = Clients::getByName($clientName);
-
   if ($stored){
     $msg = 'El cliente ya existe mostri';
     echo json_encode(['msg' => $msg, 'type' => 'cu-error']);
     wp_die();
   }
-
   $result = Clients::add($clientName);
-
   if ($result){
     $stored = Clients::getAll();
-
     $html = "";
     foreach ($stored as $key => $value) {
       $html .= '<tr>';
@@ -116,18 +101,14 @@ function cu_add_client(){
     wp_die();
   }
 }
-
 add_action( 'wp_ajax_cu_edit_client', 'cu_edit_client' );
 function cu_edit_client(){
   $params = array();
   parse_str($_POST['data'], $params);
-
   $clientEdit = $params['ClientEdit'];
   $clientName = $clientEdit['name'];
   $clientId = $clientEdit['id'];
-
   $result = Clients::update($clientId, $clientName);
-
   if ($retuls !== false){
     echo json_encode(['msg' => 'Se actualizó correctamente el cliente',
                       'response' => $clientName,
@@ -139,17 +120,12 @@ function cu_edit_client(){
   }
   wp_die();
 }
-
-
 add_action( 'wp_ajax_cu_delete_client', 'cu_delete_client' );
 function cu_delete_client(){
-
   $params = array();
   parse_str($_POST['data'], $params);
-
   $toRemove = $params['ClientRemove'];
   $result = Clients::delete($toRemove);
-
   if ($result){
     echo json_encode(['msg' => 'Se eliminó correctamente el cliente',
                       'type' => 'cu-success']);
@@ -159,7 +135,6 @@ function cu_delete_client(){
   }
   wp_die();
 }
-
 add_action( 'wp_ajax_cu_get_sucursales', 'cu_get_sucursales' );
 function cu_get_sucursales(){
   $params = array();
@@ -170,14 +145,11 @@ function cu_get_sucursales(){
     $html = "";
     foreach ($sucursales as $key => $value)
       $html .= '<li>' . $value['direccion_publica'] . '</li>';
-
     echo $html;
   }else
     echo 'No hay sucursales cargadas';
-
   wp_die();
 }
-
 add_action( 'wp_ajax_cu_add_sucursal', 'cu_add_sucursal' );
 function cu_add_sucursal(){
   $params = array();
@@ -186,9 +158,7 @@ function cu_add_sucursal(){
   $cliente_id = $params['Sucursal']['cliente_actual'];
   $provincia = $params['Sucursal']['provincia'];
   $ciudad = $params['Sucursal']['ciudad'];
-
   $result = Clients::addSucursal($cliente_id, $sucursal, $provincia, $ciudad);
-
   if ($result){
     $sucursales = Clients::getSucursalesByClient($cliente_id);
     if (!empty($sucursales)){
@@ -204,17 +174,14 @@ function cu_add_sucursal(){
     $msg = 'Se produjo un error al agregar la sucursal. Consulte con soporte';
     echo json_encode(['msg' => $msg, 'type' => 'cu-error']);
   }
-
   wp_die();
 }
-
 add_action( 'wp_ajax_cu_get_all_sucursales', 'cu_get_all_sucursales' );
 function cu_get_all_sucursales(){
   $sucursales = Clients::getSucursales();
   echo json_encode($sucursales);
   wp_die();
 }
-
 add_action( 'wp_ajax_cu_get_geocode_sucursales', 'cu_get_geocode_sucursales' );
 add_action( 'wp_ajax_nopriv_cu_get_geocode_sucursales', 'cu_get_geocode_sucursales' );
 function cu_get_geocode_sucursales(){
@@ -225,30 +192,22 @@ function cu_get_geocode_sucursales(){
   }
   wp_die();
 }
-
-
 add_action('wp_ajax_load_prov', 'load_prov');
 add_action('wp_ajax_nopriv_load_prov', 'load_prov');
 function load_prov(){
   parse_str ($_POST['user'], $values);
   $sucursales = Clients::getSucursalesByProvincia($values['menu-prov']);
-
   echo buildLocalesListHTML($sucursales);
-
   wp_die();
 }
-
 add_action('wp_ajax_cat_filter', 'cat_filter');
 add_action('wp_ajax_nopriv_cat_filter', 'cat_filter');
 function cat_filter(){
-
   $category = $_POST['cat'];
   $sucursales = Clients::getSucursalesByCategory($category);
   echo buildLocalesListHTML($sucursales);
   wp_die();
 }
-
-
 add_action( 'wp_ajax_cu_edit_features', 'cu_edit_features' );
 function cu_edit_features(){
   parse_str($_POST['data'], $params);
@@ -278,30 +237,23 @@ function cu_edit_features(){
   }
   $msg = "";
   $return = [];
-
   foreach ($results as $key => $result) {
     if ($result === false)
       $msg .= 'Se produjo un error en el cliente con id: '. $result[0] ."y sucursal con id: ". $sucursal_id. '<br>';
   }
-
   if (strlen($msg) == 0){
     $msg = 'Se actualizaron las características exitosamente';
     $return['type'] = 'cu-success';
   } else
     $return['type'] = 'cu-error';
-
   $return['response'] = '<p>'. $msg .'</p>';
   echo json_encode($return);
   wp_die();
 }
-
-
 add_action('wp_ajax_cu_geocode_sucursales', 'cu_geocode_sucursales' );
 function cu_geocode_sucursales(){
   $results = $_POST['data'];
-
   $errors = [];
-
   foreach ($results as $key => $result) {
     $status = Clients::updateSucursalGeocode($result);
     if ($status === false){
