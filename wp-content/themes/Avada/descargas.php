@@ -93,7 +93,7 @@ $reemprod = array( 'belen' => 'Belen Intima',
 
 
 $cargados = array();
-
+echo '<div id="descargas">';
   for ($i=0; $i <= sizeof($productos); $i++) {
   if (!(in_array($productos[$i], $cargados))){
 
@@ -103,7 +103,7 @@ $cargados = array();
     for ($j=0; $j <= sizeof($files_array); $j++) {
       if ($files_array[$j-1]["producto"] == $actual) {
         echo "<div class='fusion-layout-column fusion_builder_column fusion_builder_column_1_6  fusion-one-sixth 1_6' style = 'margin-top:0px;margin-bottom:20px;width:16%;width:calc(16.66% - ( ( 4% + 4% + 4% + 4% + 4% ) * 0.1666 ) );margin-right: 3%;'>";
-        echo "<div class='fusion-column-wrapper' style='background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;'>";
+        echo "<div class='fusion-column-wrapper' style='background-position:left top;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-sizse:cover;'>";
         echo "<div class='fusion-column-content-centered'><div class='fusion-column-content'>";
         echo $files_array[$j-1]["link"];
         echo '<p style="text-align: left; padding-left: 25%;">';
@@ -117,5 +117,5 @@ $cargados = array();
     }
   }
     echo "<div style='display:none;' id='cont'></div>";
-    
+    echo '</div>';
 ?>
