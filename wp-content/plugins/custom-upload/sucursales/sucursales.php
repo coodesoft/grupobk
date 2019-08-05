@@ -8,12 +8,8 @@ function getUrlWithProtocol($text){
     $https = strpos($text, 'https');
     if ($https !== false || $http !== false)
         return $text;
-    
+
     return 'http://' . $text;
-       
-    
-    
-    
 }
 function buildLocalesListHTML($sucursales){
   global $imgBasePath;
@@ -33,13 +29,13 @@ function buildLocalesListHTML($sucursales){
           <div class="direccion_publica"> <?php echo $v['direccion_publica'] ?> </div>
           <?php if ( strlen($v['telefono']) ) { ?>
               <div class="telefono">
-                  <img class="items imgtel" data-toggle="tooltip" data-placement="top" title="Teléfono" src="<?php echo $imgBasePath.'phone.svg'?>">
+                  <img class="items imgtel" data-toggle="tooltip" data-placemen="top" title="Teléfono" src="<?php echo $imgBasePath.'phone.svg'?>">
                   <p class="numtel">
-                    <?php echo $v['telefono'] ?> 
+                    <?php echo $v['telefono'] ?>
                   </p>
               </div>
           <?php } ?>
-              
+
           <div class="info">
             <ul>
               <?php if ( strlen($v['sitio_web']) ) { ?>
@@ -67,6 +63,7 @@ function buildLocalesListHTML($sucursales){
               <?php } ?>
             </ul>
           </div>
+          <div class="fusion-separator fusion-full-width-sep sep-single sep-solid separator"></div>
         </div>
       <?php }?>
     </div>
@@ -215,7 +212,7 @@ function cu_edit_features(){
   $result = [];
   $results = [];
   $specialKeys = Clients::getSpecialKeys();
-    
+
   foreach ($clientes as $cliente_id => $sucursales) {
     foreach ($sucursales as $sucursal_id => $features) {
       $fields = [];
@@ -224,7 +221,7 @@ function cu_edit_features(){
       $fields['venta_minorista'] = 0;
       $fields['venta_online'] = 0;
       $fields['revendedoras'] = 0;
-      
+
       foreach ($features as $key => $value) {
         if ( in_array($key, $specialKeys) )
           $fields[$key] = $value;

@@ -210,7 +210,7 @@ div#n2-ss-2-align {
 }
 
 .n2-ss-slider-1.n2-ss-swipe-element.n2-ow.n2-grab {
-    height: 550px!important;
+    max-height: 550px;
 }
 
 h3.marcas {
@@ -326,18 +326,17 @@ div.wpcf7 {
 }
 
 .titular {
-    margin-bottom: 0em;
-	margin-top: 50px;
+	margin: 50px 0 0;
+	width:80%;
 }
 
 .titular h2{
 	font-family: 'myriad-semibold'!important;
-	margin-left: 5px;
 }
 
 .marcas_container, .contacto_container{
 	max-width:1170px!important;
-	margin:0 auto!important;
+	margin: 0 auto!important;
 }
 
 .fusion-layout-column.fusion-one-half {
@@ -699,7 +698,7 @@ a#fusion-tab-revendedoras, a#fusion-tab-locales, a#fusion-tab-distribuidora, a#f
 	margin:0 auto!important;
 }
 .fusion-tabs {
-	width:80%;
+	width:100%;
 	margin:0 auto;
 }
 
@@ -712,13 +711,26 @@ a#fusion-tab-revendedoras, a#fusion-tab-locales, a#fusion-tab-distribuidora, a#f
 form#loginform, form#lostpasswordform {
     padding-bottom: 65px;
 }
+#post-744 {
+	width: 80%;
+    margin: 0 auto;
+	min-width: 700px;
+    max-width: 1170px;
+}
 
 @media only screen and (max-width: 700px) {
   	#main {
     	padding-left: 5px !important;
 		padding-right: 5px !important;
  	}
-
+	div > #content {
+    	margin: 35px auto 0!important;
+	}
+	#post-744 {
+		width: 80%;
+    	margin: 0 auto;
+		min-width:0px;
+	}
 	div#contacto_tab {
     	margin: 0px 0em;
 	}
@@ -836,8 +848,19 @@ form#loginform, form#lostpasswordform {
 		width:60%;
 	}
 }
-
+@media only screen and (max-width: 640px){
+	div > #content {
+    	margin: 115px auto 0!important;
+	}
+}
 @media only screen and (min-width: 701px) and (max-width: 800px){
+	div > #content {
+    	margin: 35px auto 0!important;
+	}
+	#post-744 {
+		width: 80%;
+    	margin: 0 auto;
+	}
 	div#grupobk-separator{
 		max-width:90%;
 	}
@@ -946,7 +969,7 @@ h3.map-site {
 #gbsCatalog{
     margin: auto;
 	padding-bottom: 1%;
-	padding-top: 2%;
+	padding-top: 3%;
 }
 
 .cart_style {
@@ -1119,13 +1142,10 @@ p.demo_store{
   display: none;
 }
 
-.contacto_container, .preguntas-section {
-	padding:50px 0!important;
-}
-
 .preguntas-section {
 	width: 80%;
     margin: 0 auto;
+	padding:50px 0!important;
 }
 
 .info_list .filters {
@@ -1231,6 +1251,18 @@ body.bk-progress{
 	#grupobk-button {
 		max-width:100%!important;
 	}
+	.interior.int_frec {
+    	width: 100%!important;
+    	min-width: 300px;
+	}
+	#preg_frec{
+		width: 80%!important;
+    	margin: 0px auto;
+    	min-width: 280px;
+	}
+	.titular_frec {
+		margin: 50px auto 0;
+	}
 }
 
 @media only screen and (max-width: 500px){
@@ -1241,11 +1273,6 @@ body.bk-progress{
 
 	.locales-section #provincia{
 		text-align:center;
-	}
-
-	.titular h2{
-		text-align:center;
-		
 	}
 }
 
@@ -1348,7 +1375,6 @@ body.page-template-default.page.page-id-1171.logged-in.woocommerce-cart.woocomme
 	width: 100%;
 	padding-bottom: 4em;
     margin: 0px auto;
-
 }
 
 #preg_frec h3 {
@@ -1360,7 +1386,6 @@ body.page-template-default.page.page-id-1171.logged-in.woocommerce-cart.woocomme
 	font-family: 'myriad-set-pro-text'!important;
 	font-size: 25.6px!important;
 	font-weight: 600;
-
 }
 #preg_frec p{
 	    width: 100%;
@@ -1382,11 +1407,10 @@ body.page-template-default.page.page-id-1171.logged-in.woocommerce-cart.woocomme
 }
 .interior{
 	display: block;
-    width: 80%;
     height: auto;
     margin: 0 auto;
     max-width: 1170px;
-    min-width: 700px;
+    min-width: 0px!important;
 	padding-bottom: 4em;
 }
 #titular{
@@ -1418,4 +1442,36 @@ body.page-template-default.page.page-id-1171.logged-in.woocommerce-cart.woocomme
     min-width: 700px;
     background-color: #e2e2e2;
     margin: 0px auto 0px auto;
+}
+#login-box{
+	margin-left: auto;
+}
+.nav.fusion-mobile-tab-nav{
+	height: 0px;
+}
+.telefono{
+	    display: block;
+}
+.numtel, .imgtel{ 
+	display: inline-block;
+    vertical-align: middle;
+}
+.avada-myaccount-user{
+    padding-top: 3%;
+}
+.post{
+	width: 80%;
+    margin: auto;
+    padding-bottom: 2%;
+}
+#descargas{
+	padding-top: 4%;
+    margin: auto;
+	min-width: 700px;
+    max-width: 1170px;
+	padding-bottom: 2%;
+}
+#descargas .cont {
+    width: 85px;
+    height: 75px;
 }

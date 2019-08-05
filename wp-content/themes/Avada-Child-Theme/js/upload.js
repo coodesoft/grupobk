@@ -95,6 +95,13 @@
 
   initialize();
 
+	$('.trescol').on('click', 'span.uploadtextfield', function(){
+		$(this).siblings(".file-archivo").children('.file-archivo').click();
+	});
+
+	$('.trescol').on('change', 'input.file-archivo', function(){
+		showPreloadFile(this);
+	});
 
 	let root = '#body';
 	let element = '.nombre_cliente';
@@ -102,10 +109,6 @@
 	$(root).on('click', '.ciudad', function(){
     $(this).siblings(".sucursal").toggleClass("mostrar", 1000, "easeOutSine");
   });
-
-	$('.trescol').on('click', 'span.uploadtextfield', function(){
-		$(this).siblings(".file-archivo").children('.file-archivo').click();
-	});
 
 	$(root).on('change', '#provincia select', function(e){
 		$('body').addClass('bk-progress');
@@ -153,10 +156,6 @@
 			if (sucursales.length)
 				loadMapIndicator(address, featHtmlAddress);
 		});
-	});
-
-	$('.trescol').on('change', 'input.file-archivo', function(){
-		showPreloadFile(this);
 	});
 
 })(jQuery);
