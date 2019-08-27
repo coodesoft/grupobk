@@ -198,9 +198,11 @@ function gbs_create_order(){
   $commonurl = get_user_meta(1, "url", true);
   $endpoint = $commonurl . "/api/Order";
   $send_data = array(
+    'timeout'     => 180,
     'headers'     => array('Content-Type' => 'application/json; charset=utf-8'),
     'body'        => json_encode($ws_json)
     );
+    
   $result = wp_remote_post($endpoint, $send_data);
   $values = array( 'cliente_id' => $user->ID,
                    'resultado' => $result,
