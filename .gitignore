@@ -1,0 +1,21 @@
+# archivos de config vscode 
+
+.vscode/
+
+#track .gitignore (i.e. do NOT ignore it)
+!.gitignore
+
+# ignorar log files 
+*.log
+
+# ignorar archivos compilados
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# ignorar temas específicos 
+wp-content/themes/twenty*/
+wp-content/themes/enfold/

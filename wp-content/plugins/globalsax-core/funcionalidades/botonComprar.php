@@ -7,7 +7,7 @@ function gbs_cartFunctions(){ ?>
   <div class="cart-actions">
     <div class="action-elements">
       <a href= "<?php echo home_url('/catalogo') ?>" class="wpcf7-form-control wpcf7-submit submit_button" style="display: inline-block; padding: 10px 10px !important; width:116px; background-color:#802754!important" >Ver Catalogo</a>
-      <a onclick="return VaciarCarrito()" class="del_button"><img src="/demo/img/basura.svg"></a>
+      <a onclick="return VaciarCarrito()" class="del_button"><img src="/img/basura.svg"></a>
       <a id="gbsEnviarPedido" class="wpcf7-form-control wpcf7-submit submit_button" style="height:40px;width:fit-content;" >Realizar Pedido</a>
     </div>
   </div>

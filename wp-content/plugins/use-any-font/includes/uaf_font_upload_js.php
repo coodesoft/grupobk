@@ -1,4 +1,5 @@
 <?php
+/* *******FONT UPLOAD VIA JS ********  */
 $allowedFontFormats 	= array ('ttf','otf','woff');
 $uaf_api_key			= get_option('uaf_api_key');
 
@@ -133,6 +134,7 @@ $fontsData		= json_decode($fontsRawData, true);
                 	
                 </td>
                 <td>
+                <input type="hidden" name="url" value="<?php echo home_url(); ?>" />
                 <input type="hidden" name="api_key" value="<?php echo $uaf_api_key; ?>" />
                 <input type="hidden" name="font_count" value="<?php echo count($fontsData); ?>" />
                 <input type="hidden" name="convert_response" id="convert_response" value="" />
@@ -196,7 +198,7 @@ jQuery('#open_add_font_form')
 	if(! $formValid.valid()) return false;
 	
 	jQuery.ajax( {
-      url: '<?php echo $uaf_font_convert_server_url; ?>/font-convertor/convertor/convert.php',
+      url: '<?php echo $uaf_font_convert_server_url; ?>/font-convertor/convertor/edd_convert.php',
       type: 'POST',
       data: new FormData( this ),
       processData: false,

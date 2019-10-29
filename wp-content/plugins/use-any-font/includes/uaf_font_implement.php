@@ -82,7 +82,8 @@ $fontsData		= json_decode($fontsRawData, true);
             <tr>    
                 <td valign="top">Select elements to assign</td>
                 <td>
-                	<input name="elements[]" value="body" type="checkbox" /> All (body tags)<br/>
+                	<p><b>Normal Elements</b></p>
+                    <input name="elements[]" value="body" type="checkbox" /> All (body tags)<br/>
                     <input name="elements[]" value="h1" type="checkbox" /> Headline 1 (h1 tags)<br/>
                     <input name="elements[]" value="h2" type="checkbox" /> Headline 2 (h2 tags)<br/>
                     <input name="elements[]" value="h3" type="checkbox" /> Headline 3 (h3 tags)<br/>
@@ -92,7 +93,21 @@ $fontsData		= json_decode($fontsRawData, true);
                     <input name="elements[]" value="p" type="checkbox" /> Paragraphs (p tags)<br/>
                     <input name="elements[]" value="blockquote" type="checkbox" /> Blockquotes<br/>
                     <input name="elements[]" value="li" type="checkbox" /> Lists (li tags)<br/>
-                    <input name="elements[]" value="a" type="checkbox" /> Hyperlink (a tags)
+                    <input name="elements[]" value="a" type="checkbox" /> Hyperlink (a tags)<br/><br/>
+
+                    <p><b>Menus</b></p>
+                    <?php
+                    $menus = get_terms('nav_menu');
+                        if (!empty($menus)){
+                            foreach($menus as $menu){
+                    ?>
+                                <input name="elements[]" value="#menu-<?php echo $menu->slug; ?> li a, #menu-<?php echo $menu->slug; ?> li span" type="checkbox" /> <?php echo $menu->name; ?><br/> 
+                    <?php
+                            }
+                        } else {
+                            echo 'No Menus Found<br/>';
+                        }
+                    ?>
                 </td>
             </tr>
             <tr>        

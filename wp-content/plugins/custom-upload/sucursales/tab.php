@@ -1,12 +1,8 @@
 <?php
-
 require_once 'sucursales.php';
-
-
 function sucursales(){
   $screen =  get_current_screen();
 	$pluginPageUID = $screen->parent_file;
-
 ?>
   <h2 class="nav-tab-wrapper">
     <a href="<?= admin_url('admin.php?page='.$pluginPageUID.'&tab=sucursales&action=user')?>" class="nav-tab">Cargar clientes</a>
@@ -19,27 +15,20 @@ function sucursales(){
     <?php
     $activeTab = $_GET['tab'];
     $action = $_GET['action'];
-
     if ($activeTab == 'sucursales' && !isset($action))
       createCliente();
-
     if ($activeTab == 'sucursales' && $action == 'user')
       createCliente();
-
     if ($activeTab == 'sucursales' && $action == 'upload')
       uploadSucursal();
-
     if ($activeTab == 'sucursales' && $action == 'edit')
       editFeatures();
-
     if ($activeTab == 'sucursales' && $action == 'geocode')
       geocodeSucursales();
-
     ?>
   </div>
 <?
 }
-
 function geocodeSucursales(){ ?>
   <div id="ucInstructions">
     <p>Este proceso es complejo y puede llevar algunos minutos</p>
@@ -54,8 +43,6 @@ function geocodeSucursales(){ ?>
   </div>
 <?php
 }
-
-
 function createCliente(){ ?>
   <div id="ucInstructions">
     <p>Ingrese el nombre del cliente que desea agregar.
@@ -114,7 +101,6 @@ function createCliente(){ ?>
   </div>
 <?php
 }
-
 function uploadSucursal(){?>
   <div id="uploadSucursal">
 
@@ -195,7 +181,6 @@ function uploadSucursal(){?>
   </div>
 <?php
 }
-
 function editFeatures(){?>
   <div id="editFeatures">
     <div id="ucInstructions">

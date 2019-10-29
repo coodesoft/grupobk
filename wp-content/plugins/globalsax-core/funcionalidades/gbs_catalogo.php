@@ -16,19 +16,18 @@ function gbs_get_categories(){
       if(!($category->term_id ==149)){
     $categories[$key]['name'] = $category->name;
     $categories[$key]['id'] = $category->term_id;
-
       }
   }
   return $categories;
 }
 add_action( 'wp_ajax_nopriv_gbs_get_products_by_category', 'gbs_get_products_by_category' );
 add_action( 'wp_ajax_gbs_get_products_by_category', 'gbs_get_products_by_category' );
-
 function gbs_get_products_by_category(){
   $params = array();
   parse_str($_POST['data'], $params);
   $args = [
     'post_type' => 'product',
+    'order'   => 'ASC',
     'orderby'   => 'title',
     'status' => 'publish',
     'posts_per_page' => -1,
@@ -47,18 +46,12 @@ function gbs_get_products_by_category(){
 }
 add_action( 'wp_ajax_nopriv_gbs_load_variations', 'gbs_load_variations' );
 add_action( 'wp_ajax_gbs_load_variations', 'gbs_load_variations' );
-
 function gbs_load_variations(){
-
   $id = $_POST['product_id'];
-
   $factory = new WC_Product_Factory();
   $product = $factory->get_product($id);
-
   $cartItems = gbsBuildCartItemsArray(WC()->cart->get_cart());
-
   //echo json_encode(WC()->cart->get_cart()); wp_die()
-
   if ( $product->is_type('variable') ){
     $args = array(
     	'post_type'     => 'product_variation',
@@ -69,39 +62,30 @@ function gbs_load_variations(){
     	'post_parent'   => $id // get parent post-ID
     );
     $variations = get_posts( $args );
-
     $varMeta = gbsBuildVariationArray($variations);
     //echo json_encode($varMeta);
     echo gbs_variation_table($varMeta, $id, $product->get_name(), $cartItems);
   } else{
     echo gbs_simple_product_table($product->get_id(), $cartItems);
   }
-
   wp_die();
 }
 add_action( 'wp_ajax_nopriv_gbs_add_variations_to_cart', 'gbs_add_variations_to_cart' );
 add_action( 'wp_ajax_gbs_add_variations_to_cart', 'gbs_add_variations_to_cart' );
-
 function gbs_add_variations_to_cart(){
   $variations = array();
   parse_str($_POST['data'], $variations);
-
   $safe_parent = intval($variations['Product']);
   //echo json_encode($variations); throw new \Exception("Error Processing Request", 1);
-
-
   if ($variations['productType'] == 'simple'){
     $keys = array_keys($variations['Product']);
     $safe_parent = $keys[0];
   }
-
   if ($safe_parent){
     if ($variations['productType'] == 'variable'){
-
       $parent_product = $variations['Product'];
       foreach ($variations['Variation'] as $id => $element) {
         $quantity = $element['qty'];
-
         if ($element['key']){
           if ($quantity != "" && $quantity>0)
             $result = WC()->cart->set_quantity($element['key'], $quantity);
@@ -116,7 +100,6 @@ function gbs_add_variations_to_cart(){
       $keys = array_keys($variations['Product']);
       $quantity = $variations['Product'][$keys[0]]['qty'];
       $key = $variations['Product'][$keys[0]]['key'];
-
       if ($key){
         if ($quantity != "" && $quantity>0)
           $result = WC()->cart->set_quantity($key, $quantity);
@@ -125,7 +108,6 @@ function gbs_add_variations_to_cart(){
       } else
         $result = WC()->cart->add_to_cart($keys[0], $quantity);
     }
-
     $counter = 0;
     $cartItems = WC()->cart->get_cart();
     $productObj = get_product($safe_parent);
@@ -143,9 +125,6 @@ function gbs_add_variations_to_cart(){
         }
       }
     }
-
-
-
     if ($counter == 0)
       echo json_encode([
           'msg' => 'Se produjo un error al agregar al carrito',
@@ -159,9 +138,6 @@ function gbs_add_variations_to_cart(){
   }
   wp_die();
 }
-
-
-
 /* FUNCIONES PARA REALIZAR UN PEDIDO */
 add_action( 'wp_ajax_nopriv_gbs_create_order', 'gbs_create_order' );
 add_action( 'wp_ajax_gbs_create_order', 'gbs_create_order' );
@@ -202,26 +178,24 @@ function gbs_create_order(){
     'headers'     => array('Content-Type' => 'application/json; charset=utf-8'),
     'body'        => json_encode($ws_json)
     );
-    
+    //var_dump($send_data);
   $result = wp_remote_post($endpoint, $send_data);
-  $values = array( 'cliente_id' => $user->ID,
+  /*$values = array( 'cliente_id' => $user->ID,
                    'resultado' => $result,
                    'json' => $ws_json,
                    'tipo' => 'pedido');
-  $types = array( '%d', '%s', '%s', '%s' );
+  $types = array( '%d', '%s', '%s', '%s' );*/
   global $woocommerce;
   $woocommerce->cart->empty_cart();
-
   if ($status)
     echo json_encode(['status' => 'gbs-success', 'msg' => 'El pedido se ha realizado con éxito', 'WSResult' => $result, 'ws_json' => $ws_json]);
   else
     echo json_encode(['status' => 'gbs-error', 'msg' => 'Se ha producido un error al procesar el pedido', 'WSResult' => $result, 'ws_json' => $ws_json]);
-    global $wpdb;
+    /*global $wpdb;
     $error_table = $wpdb->prefix . ('gs_error');
-    $wpdb->insert($error_table, $values ,$types);
+    $wpdb->insert($error_table, $values ,$types);*/
   wp_die();
 }
-
 function gbs_biuld_ws_object($user_id, $adicionales, $order){
   $detalle = [];
   $data = [];
@@ -242,16 +216,16 @@ function gbs_biuld_ws_object($user_id, $adicionales, $order){
     $data['Quantity'] = $item['qty'];
     $detalle[] = $data;
   };
-
   global $wpdb;
   $gs_clients_table = $wpdb->prefix . ('gs_clients');
   $select_seller_id = "SELECT seller_id FROM ". $gs_clients_table . " WHERE Client_ID = " . $adicionales['cliente_id'];
   $seller_id = $wpdb->get_var($select_seller_id);
+  //$fecha_emision = date("d/m/Y");
    $params = [
      'Order_id' => $order->get_order_number(),
      'Client_ID' => $adicionales['cliente_id'],
      'UserID' => $user_id,
-     'Fecha_emision' => date('d/m/Y'),
+     'Fecha_Emision' => date("m/d/Y"),
      'Seller_id' => $seller_id,
      'UserAction' => $adicionales['pedido'],
      'Detail' =>  $detalle ,
@@ -260,8 +234,6 @@ function gbs_biuld_ws_object($user_id, $adicionales, $order){
     $params['SucName'] = $adicionales['sucursal'];
   return $params;
 }
-
-
 add_action('wp_ajax_get_do_checkout', 'get_do_checkout');
 add_action('wp_ajax_nopriv_get_do_checkout', 'get_do_checkout');
 function get_do_checkout(){
@@ -283,9 +255,6 @@ function get_do_checkout(){
 				<?php }
 				wp_die();
 }
-
-
-
 /* FUNCIONES INTERNAS DE RETORNO */
 function gbs_catalog(){
   $categories = gbs_get_categories();
@@ -305,13 +274,13 @@ function gbs_catalog(){
     <div id="gbs_productos_list"></div>
   </div>
 <?php }
-
 function gbs_products_list($products, $cartItems){ ?>
 
   <ul class="products products-3">
     <?php while ($products->have_posts()) : ?>
       <?php $products->the_post();
             $product = get_product( $products->post->ID );
+            if (get_post_status($products->post->ID) == "publish"){
       ?>
       <li class="product-<?php echo $product->get_id() ?> product product-type" data-product="<?php echo $product->get_id() ?>">
         <div class="product-description">
@@ -327,13 +296,13 @@ function gbs_products_list($products, $cartItems){ ?>
         </div>
         <div id="variation-<?php echo $product->get_id() ?>" class="product-variations"> </div>
       </li>
+        <?php } ?>
     <?php endwhile;
         wp_reset_query();
     ?>
   </ul>
 
 <?php }
-
 function gbs_variation_table($varMeta, $parentId, $parentName, $inverseCartItems){
   $talles = $varMeta['talles'];
   $variations = $varMeta['variations'];
@@ -344,13 +313,17 @@ function gbs_variation_table($varMeta, $parentId, $parentName, $inverseCartItems
       <tr>
         <th></th>
         <?php foreach ($talles as $index => $element): ?>
-        <th data-order="<?php echo $element['order']?>"><?php echo $element['talle'] ?></th>
+        <th data-order="<?php echo $element['order']?>"><?php echo strtoupper($element['talle']) ?></th>
         <?php endforeach; ?>
       </tr>
 
       <?php foreach ($variations as $color => $meta): ?>
+      <?php $object_color = get_term_by( 'slug', strtolower($color), 'pa_color')?>
       <tr>
-        <td class="gbs_tag"><?php echo strtoupper($color)?></td>
+        <td class="gbs_tag"><?php if ($object_color) {echo strtoupper( $object_color->description);
+        }elseif (!$object_color){
+        echo strtoupper($color);
+        } ?></td>
         <?php foreach ($meta as $id => $Variation): ?>
 
         <?php
@@ -369,7 +342,6 @@ function gbs_variation_table($varMeta, $parentId, $parentName, $inverseCartItems
     <button id="gbsAddVariationToCartButton" class="wpcf7-form-control wpcf7-submit submit_button" style="padding: 10px 10px !important">Agregar al carrito</button>
   </form>
 <?php }
-
 function gbs_simple_product_table($idProduct, $inverseCartItems){ ?>
   <?php
     $key = isset($inverseCartItems[$idProduct]) ? $inverseCartItems[$idProduct] : 0;
@@ -388,7 +360,6 @@ function gbs_simple_product_table($idProduct, $inverseCartItems){ ?>
   </form>
 
 <?php }
-
 /* FUNCIONES ESTRUCTURALES */
 function gbsBuildVariationArray($variations){
   $arrVariations = [];
@@ -401,45 +372,35 @@ function gbsBuildVariationArray($variations){
     $talles[$talle] = ['talle' => $talle, 'order' => $order];
     $arrVariations[$color][] = ['talle' => $talle, 'id' => $variation->ID, 'order' => $order];
   }
-
   foreach ($arrVariations as $key => $value) {
     $arrVariations[$key] = sortByOrderAttr($value);
   }
-
   $varMeta['talles'] = sortByOrderAttr($talles);
   $varMeta['variations'] = $arrVariations;
   return $varMeta;
 }
-
 function sortByOrderAttr($collection){
   usort($collection, function($a, $b){
       if ($a['order'] == $b['order'])
         return 0;
-
       return ($a['order'] < $b['order']) ? -1 : 1;
   });
   return $collection;
 }
-
 function gbsBuildCartItemsArray($cartItems){
   $array = [];
   foreach ($cartItems as $key => $value) {
     $id = $value['variation_id'] ? $value['variation_id'] : $value['product_id'];
     $array[$id] = $key;
   }
-
   return $array;
 }
-
 function gbsBuildProductsCartArray($cartItems){
   $array = [];
-
   foreach ($cartItems as $key => $value) {
     $id = $value['product_id'];
-
     if ( !isset($array[$id]) )
       $array[$id] = 0;
-
     $array[$id] = $array[$id] + $value['quantity'];
   }
   return $array;
