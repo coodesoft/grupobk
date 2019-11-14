@@ -26,7 +26,7 @@ define('DB_NAME', 'globalsax_ext');
 define('DB_USER', 'coodesoft');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'coodesoft');
+define('DB_PASSWORD', '**c00des0ft**');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
